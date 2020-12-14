@@ -7,13 +7,21 @@ Public Class frmReceivePayments
     Dim dt As New DataTable
     Dim rowIndex As Integer
     Public succesPay As Boolean
+    Public MODE = "SALES INVOICE"
     Sub disposeForm()
         txtCustomerName.Text = ""
         cardID = ""
         txtChequeNo.Text = ""
         dtpcheckDate.Value = Now
         txtCheckAmount.Text = "0.00"
+        txtCashAmount.Text = "0.00"
         txtMemo.Text = ""
+        lblTotalAmountReceived.Text = "0.00"
+        lblTotAmount.Text = "0.00"
+        lblTotDiscount.Text = "0.00"
+        lblTotalAmountApplied.Text = "0.00"
+        lblOutBalance.Text = "0.00"
+        dgv.Rows.Clear()
     End Sub
     Sub generatePaymentNo()
       Try
@@ -35,6 +43,10 @@ Public Class frmReceivePayments
     End Sub
     Sub getAccountSettings()
         Dim sysSettings As New systemSettings_class
+        sysSettings.settingsName = Me.Text & "_ReceivableACC"
+        sysSettings.settingsValue = txtRecvAccount.Text
+        sysSettings.get_settingsValue()
+        txtRecvAccount.Text = sysSettings.return_settingsValue
         sysSettings.settingsName = Me.Text & "_PaymentDepositACC"
         sysSettings.settingsValue = txtDepositAcc.Text
         sysSettings.get_settingsValue()
@@ -69,12 +81,14 @@ Public Class frmReceivePayments
             sc.totAmount = CDec(lblTotalAmountReceived.Text)
             sc.outBalance = CDec(lblOutBalance.Text)
             sc.overallBal = CDec(lblTotalAmountApplied.Text)
-            sc.accNo = txtDepositAcc.Text
+        sc.accNo = txtDepositAcc.Text
+
+
         For Each row As DataGridViewRow In dgv.Rows
 
             If CDec(row.Cells(6).Value) <> 0 Then
                 sc.refNo = row.Cells(0).Value
-                sc.discount = CDec(row.Cells(4).Value)
+                sc.discount = CDec(row.Cells(3).Value)
                 sc.amountApplied = CDec(row.Cells(6).Value)
                 sc.recieve_payments()
             End If
@@ -83,25 +97,25 @@ Public Class frmReceivePayments
     End Sub
     Sub acc_entry()
         Dim ae As New accEntry_class
-        ae.refno = txtPaymentNo.Text
-        ae.SRC = Me.Text
-        ae.cardID = cardID
-        ae.memo = "Deposit: " & txtMemo.Text
-        ae.account = txtDepositAcc.Text
-        ae.debit = CDec(lblTotalAmountReceived.Text)
-        ae.credit = 0
-        ae.insert_Acc_entry_class()
         For Each row As DataGridViewRow In dgv.Rows
             If CDec(row.Cells(6).Value) <> 0 Then
+                ae.refno = txtPaymentNo.Text
+                ae.SRC = row.Cells(0).Value
+                ae.cardID = cardID
                 ae.memo = "Discount Amount for Invoice No: " & row.Cells(0).Value
                 ae.account = txtDiscountAcc.Text
-                ae.debit = row.Cells(4).Value
+                ae.debit = row.Cells(3).Value
+                ae.credit = 0
+                ae.insert_Acc_entry_class()
+                ae.memo = "Amount Received: " & txtMemo.Text
+                ae.account = txtDepositAcc.Text
+                ae.debit = row.Cells(6).Value
                 ae.credit = 0
                 ae.insert_Acc_entry_class()
                 ae.memo = "Payment Received for Invoice No: " & row.Cells(0).Value
-                ae.account = row.Cells(7).Value
+                ae.account = txtRecvAccount.Text
                 ae.debit = 0
-                ae.credit = row.Cells(6).Value
+                ae.credit = CDec(row.Cells(3).Value) + CDec(row.Cells(6).Value)
                 ae.insert_Acc_entry_class()
             End If
         Next
@@ -120,7 +134,13 @@ Public Class frmReceivePayments
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         frmCardListForSelection.formMode = "ReceivePayments"
         frmCardListForSelection.ShowDialog()
-        get_invoice_list()
+        If frmCardListForSelection.itemClick = True Then
+            cardID = frmCardListForSelection.LV.SelectedItems(0).SubItems(0).Text
+            txtCustomerName.Text = frmCardListForSelection.LV.SelectedItems(0).SubItems(1).Text
+            totalBalance = frmCardListForSelection.LV.SelectedItems(0).SubItems(4).Text
+            get_invoice_list()
+        End If
+
     End Sub
     Private Declare Function GetActiveWindow Lib "user32" Alias "GetActiveWindow" () As IntPtr
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
@@ -130,13 +150,17 @@ Public Class frmReceivePayments
     End Sub
 
     Sub get_invoice_list()
+        Try
         Dim sc As New sales_class
         Dim ac As New Accounting_class
+        sc.accNo = txtRecvAccount.Text
         sc.searchValue = cardID
         sc.get_invoice_list()
         dgv.Rows.Clear()
         For Each row As DataRow In sc.dtable.Rows
-            dgv.Rows.Add(row(0), row(1), row(2), Format(row("REMAINING_BAL"), "N"), "0.00", Format(row("REMAINING_BAL"), "N"), "0.00")
+                If row(3) > row(5) Then
+                    dgv.Rows.Add(row(1), Format(row(2), "MM/dd/yyyy"), Format(CDec(row(3)), "N"), Format(CDec(row(4)), "N"), Format(CDec(row(5)), "N"), Format((CDec(row(3)) - CDec(row(4)) - CDec(row(5))), "N"), "0.00", "")
+                End If
         Next
         ac.command = 0
         For Each row As DataGridViewRow In dgv.Rows
@@ -144,25 +168,28 @@ Public Class frmReceivePayments
             ac.memotype = "Receivable:"
             ac.GET_ACCNO_OF_TRNO()
             row.Cells(7).Value = ac.accNo
-        Next
+            Next
+        Catch ex As Exception
+        End Try
     End Sub
 
     Private Sub frmReceivePayments_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
-        Me.Dispose()
     End Sub
-
-    Private Sub frmReceivePayments_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.MdiParent = frmSalesMain
+    Public Sub load_command()
+        'Me.MdiParent = frmSalesMain
         getAccountSettings()
         generatePaymentNo()
         succesPay = False
+    End Sub
+    Private Sub frmReceivePayments_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+       
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         If chkCash.Checked = False And chkCheck.Checked = False Then
             Exit Sub
         End If
-        If lblTotalAmountApplied.Text = lblTotalAmountReceived.Text Then
+        If lblTotalAmountApplied.Text = lblTotalAmountReceived.Text And CDec(lblTotalAmountApplied.Text) > 0 Then
             If MsgBox("ARE YOU SURE YOU WANT TO RECORD PAYMENTS ?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "WARNING") = MsgBoxResult.Yes Then
                 Try
                     RECORDPAYMENTS()
@@ -170,8 +197,12 @@ Public Class frmReceivePayments
                         recordCollection()
                     End If
                     MsgBox(" PAYMENT POSTED !", MsgBoxStyle.Information, "SUCCESS")
-                    frmSalesInvoice.successpay = True
-                    Me.Close()
+                    disposeForm()
+                    load_command()
+                    If MODE = "SALES INVOICE" Then
+                        succesPay = True
+                        Me.Close()
+                    End If
                 Catch ex As Exception
                     MsgBox(ex.Message)
                 End Try
@@ -184,12 +215,15 @@ Public Class frmReceivePayments
 
     Sub sum_value()
         Dim amountApplied As Decimal
+        Dim totalAmount As Decimal
         Dim discount As Decimal
         For Each row As DataGridViewRow In dgv.Rows
-            discount += CDec(row.Cells(4).Value)
+            discount += CDec(row.Cells(3).Value)
             amountApplied += CDec(row.Cells(6).Value)
+            totalAmount += CDec(row.Cells(5).Value)
         Next
         lblTotalAmountApplied.Text = amountApplied.ToString("N")
+        lblTotAmount.Text = totalAmount.ToString("N")
         lblTotDiscount.Text = discount.ToString("N")
         lblOutBalance.Text = (CDec(lblTotalAmountReceived.Text - amountApplied)).ToString("N")
     End Sub
@@ -242,12 +276,20 @@ Public Class frmReceivePayments
 
     Private Sub dgv_CellMouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles dgv.CellMouseDoubleClick
         Try
-            If dgv.CurrentCell.ColumnIndex = 4 Then
+            If dgv.CurrentCell.ColumnIndex = 3 Then
                 Dim discount As Double = InputBox("Enter the Discount Amount you apply", "Discount Amount Apply")
-                dgv.CurrentRow.Cells(4).Value = Format(discount, "N")
-                dgv.CurrentRow.Cells(5).Value = Format(CDec(dgv.CurrentRow.Cells(3).Value) - discount, "N")
+                dgv.CurrentRow.Cells(3).Value = Format(discount, "N")
+                dgv.CurrentRow.Cells(5).Value = Format(CDec(dgv.CurrentRow.Cells(2).Value) - discount - CDec(dgv.CurrentRow.Cells(4).Value), "N")
             ElseIf dgv.CurrentCell.ColumnIndex = 6 Then
                 Dim amountApplied As Double = InputBox("Enter the amount you apply", "Amount Apply")
+                If CDec(dgv.CurrentRow.Cells(3).Value) > CDec(amountApplied) Then
+                    MsgBox("The amount you applied is not greater than discount you applied. Please input correctly", MsgBoxStyle.Critical, "SYSTEM INFORMATION")
+                    Exit Sub
+                ElseIf CDec(dgv.CurrentRow.Cells(5).Value) < CDec(amountApplied) Then
+                    MsgBox("You Applied Greater than amount payable of this invoice. system will adjust the applied payment amount", MsgBoxStyle.Exclamation, "SYSTEM REMINDER")
+                    dgv.CurrentRow.Cells(6).Value = dgv.CurrentRow.Cells(5).Value
+                    Exit Sub
+                End If
                 dgv.CurrentRow.Cells(6).Value = Format(amountApplied, "N")
             End If
         Catch ex As Exception
@@ -325,5 +367,25 @@ Public Class frmReceivePayments
 
     Private Sub txtChequeNo_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtChequeNo.TextChanged
 
+    End Sub
+
+    Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button7.Click
+        Dim ss As New systemSettings_class
+        frmAccountList.mode = ""
+        frmAccountList.successClick = False
+        frmAccountList.ShowDialog()
+        If frmAccountList.successClick = True Then
+            txtRecvAccount.Text = frmAccountList.dgv.CurrentRow.Cells(0).Value
+            ss.settingsName = Me.Text & "_ReceivableACC"
+            ss.settingsValue = txtRecvAccount.Text
+            ss.insert_update_settingsVariable()
+        End If
+    End Sub
+
+    Private Sub txtRecvAccount_TextChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRecvAccount.TextChanged
+        Dim AC As New Account_Class
+        AC.searchValue = txtRecvAccount.Text
+        AC.get_accountInfo()
+        lblRecvAccount.Text = AC.accDesc
     End Sub
 End Class

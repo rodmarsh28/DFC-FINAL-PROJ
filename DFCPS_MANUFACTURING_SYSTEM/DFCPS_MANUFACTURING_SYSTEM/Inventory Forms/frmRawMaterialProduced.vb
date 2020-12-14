@@ -57,6 +57,7 @@
                 inventoryClass.unitCost = row.Cells("Unit_Cost").Value
                 inventoryClass.qty = row.Cells("Qty").Value
                 inventoryClass.job = txtJONo.Text
+                inventoryClass.pcQty = row.Cells("Pc").Value
                 inventoryClass.insert_invItem_transaction()
             Next
             saveaccEntry()
@@ -115,10 +116,16 @@
         InventoryList.command = 0
         InventoryList.ShowDialog()
         If InventoryList.clickedItem = True Then
+            Dim pcQty As Integer
+            If CheckBox1.Checked = True Then
+                pcQty = InputBox("Please Enter Pc Qty", 0)
+            Else
+                pcQty = 0
+            End If
             dgv.Rows.Add(InventoryList.dgv.CurrentRow.Cells(0).Value, InventoryList.dgv.CurrentRow.Cells(1).Value, _
                          InventoryList.dgv.CurrentRow.Cells(2).Value, txtQty.Text, _
                          "0.00", _
-                         "0.00", InventoryList.dgv.CurrentRow.Cells("AssetAccount").Value)
+                         "0.00", InventoryList.dgv.CurrentRow.Cells("AssetAccount").Value, pcQty)
             InventoryList.clickedItem = False
         End If
         ROWCHANGES()
@@ -163,10 +170,10 @@
     End Sub
 
     Private Sub Button5_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
-        frmJob_list.ShowDialog()
-        If frmJob_list.clickedItem = True Then
-            txtJONo.Text = frmJob_list.dgv.CurrentRow.Cells(1).Value
-            frmJob_list.clickedItem = False
+        frmsales_list_selector.MODE = "Job"
+        frmsales_list_selector.ShowDialog()
+        If frmsales_list_selector.successClick = True Then
+            txtJONo.Text = frmsales_list_selector.DGV.CurrentRow.Cells(0).Value
         End If
     End Sub
 End Class

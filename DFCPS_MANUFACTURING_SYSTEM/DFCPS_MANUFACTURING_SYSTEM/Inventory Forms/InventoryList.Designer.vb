@@ -24,11 +24,6 @@ Partial Class InventoryList
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.dgv = New System.Windows.Forms.DataGridView()
-        Me.txtSearch = New System.Windows.Forms.TextBox()
-        Me.btnNewItem = New System.Windows.Forms.Button()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.lblItemsCount = New System.Windows.Forms.Label()
         Me.Item_No = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -38,6 +33,13 @@ Partial Class InventoryList
         Me.IncomeAccount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.AssetAccount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pcQTY = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.btnNewItem = New System.Windows.Forms.Button()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblItemsCount = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -50,54 +52,14 @@ Partial Class InventoryList
                     Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.dgv.BackgroundColor = System.Drawing.Color.White
         Me.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Item_No, Me.Description, Me.Unit, Me.Sell_Price, Me.Onhand, Me.CostAccount, Me.IncomeAccount, Me.AssetAccount, Me.Column1})
+        Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Item_No, Me.Description, Me.Unit, Me.Sell_Price, Me.Onhand, Me.CostAccount, Me.IncomeAccount, Me.AssetAccount, Me.Column1, Me.pcQTY})
         Me.dgv.Location = New System.Drawing.Point(12, 36)
         Me.dgv.MultiSelect = False
         Me.dgv.Name = "dgv"
         Me.dgv.ReadOnly = True
         Me.dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgv.Size = New System.Drawing.Size(863, 259)
+        Me.dgv.Size = New System.Drawing.Size(863, 411)
         Me.dgv.TabIndex = 6
-        '
-        'txtSearch
-        '
-        Me.txtSearch.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.txtSearch.Location = New System.Drawing.Point(13, 10)
-        Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(862, 20)
-        Me.txtSearch.TabIndex = 7
-        '
-        'btnNewItem
-        '
-        Me.btnNewItem.Location = New System.Drawing.Point(13, 301)
-        Me.btnNewItem.Name = "btnNewItem"
-        Me.btnNewItem.Size = New System.Drawing.Size(83, 30)
-        Me.btnNewItem.TabIndex = 8
-        Me.btnNewItem.Text = "New Item"
-        Me.btnNewItem.UseVisualStyleBackColor = True
-        '
-        'Timer1
-        '
-        Me.Timer1.Interval = 1000
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(749, 307)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(68, 13)
-        Me.Label1.TabIndex = 9
-        Me.Label1.Text = "Item's Count:"
-        '
-        'lblItemsCount
-        '
-        Me.lblItemsCount.AutoSize = True
-        Me.lblItemsCount.Location = New System.Drawing.Point(823, 307)
-        Me.lblItemsCount.Name = "lblItemsCount"
-        Me.lblItemsCount.Size = New System.Drawing.Size(13, 13)
-        Me.lblItemsCount.TabIndex = 10
-        Me.lblItemsCount.Text = "0"
         '
         'Item_No
         '
@@ -159,16 +121,73 @@ Partial Class InventoryList
         Me.Column1.ReadOnly = True
         Me.Column1.Visible = False
         '
+        'pcQTY
+        '
+        Me.pcQTY.HeaderText = "Onhand"
+        Me.pcQTY.Name = "pcQTY"
+        Me.pcQTY.ReadOnly = True
+        '
+        'txtSearch
+        '
+        Me.txtSearch.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtSearch.Location = New System.Drawing.Point(13, 10)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(862, 20)
+        Me.txtSearch.TabIndex = 7
+        '
+        'btnNewItem
+        '
+        Me.btnNewItem.Location = New System.Drawing.Point(16, 451)
+        Me.btnNewItem.Name = "btnNewItem"
+        Me.btnNewItem.Size = New System.Drawing.Size(83, 38)
+        Me.btnNewItem.TabIndex = 8
+        Me.btnNewItem.Text = "New"
+        Me.btnNewItem.UseVisualStyleBackColor = True
+        '
+        'Timer1
+        '
+        Me.Timer1.Interval = 1000
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(784, 463)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(68, 13)
+        Me.Label1.TabIndex = 9
+        Me.Label1.Text = "Item's Count:"
+        '
+        'lblItemsCount
+        '
+        Me.lblItemsCount.AutoSize = True
+        Me.lblItemsCount.Location = New System.Drawing.Point(858, 463)
+        Me.lblItemsCount.Name = "lblItemsCount"
+        Me.lblItemsCount.Size = New System.Drawing.Size(13, 13)
+        Me.lblItemsCount.TabIndex = 10
+        Me.lblItemsCount.Text = "0"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(101, 451)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(83, 38)
+        Me.Button1.TabIndex = 11
+        Me.Button1.Text = "Edit"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'InventoryList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(890, 343)
+        Me.ClientSize = New System.Drawing.Size(890, 495)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.lblItemsCount)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnNewItem)
         Me.Controls.Add(Me.txtSearch)
         Me.Controls.Add(Me.dgv)
+        Me.KeyPreview = True
         Me.Name = "InventoryList"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "InventoryList"
@@ -192,4 +211,6 @@ Partial Class InventoryList
     Friend WithEvents IncomeAccount As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents AssetAccount As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents pcQTY As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class

@@ -9,6 +9,8 @@ Public Class frmCardListForSelection
     Sub filterType()
         If formMode = "ReceivePayments" Then
             filterCardType = "and cardType = 'Customer' "
+        ElseIf formMode = "Sales Invoice" Then
+            filterCardType = "and cardType = 'Customer' "
         ElseIf formMode = "" Then
 
         End If
@@ -62,25 +64,7 @@ Public Class frmCardListForSelection
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         itemClick = True
         Try
-            If formMode = "ReceivePayments" Then
-                'prepare_job.cardID = LV.SelectedItems(0).SubItems(0).Text
-                'prepare_job.txtCustomerName.Text = LV.SelectedItems(0).SubItems(1).Text
-                'prepare_job.totalBalance = LV.SelectedItems(0).SubItems(4).Text
                 Me.Close()
-            ElseIf formMode = "Sales Invoice" Then
-                frmSalesInvoice.CardID = LV.SelectedItems(0).SubItems(0).Text
-                frmSalesInvoice.txtName.Text = LV.SelectedItems(0).SubItems(1).Text
-                frmSalesInvoice.totalBalance = LV.SelectedItems(0).SubItems(4).Text
-                Me.Close()
-            ElseIf formMode = "Purchase Invoice" Then
-                frmPurchases.CardID = LV.SelectedItems(0).SubItems(0).Text
-                frmPurchases.txtName.Text = LV.SelectedItems(0).SubItems(1).Text
-                frmPurchases.totalBalance = LV.SelectedItems(0).SubItems(4).Text
-                Me.Close()
-            Else
-                Me.Close()
-            End If
-
         Catch ex As Exception
 
         End Try

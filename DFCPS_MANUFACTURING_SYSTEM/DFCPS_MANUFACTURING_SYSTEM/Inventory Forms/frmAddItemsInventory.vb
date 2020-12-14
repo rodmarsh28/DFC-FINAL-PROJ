@@ -1,6 +1,8 @@
 ﻿Public Class frmAddItemsInventory
     Public mode As String
     Public SeriesNo As String
+    Dim cur_balQty As Integer
+    Dim cur_pcQty As Integer
     Sub ItemType()
         If cmbItemType.Text = "Raw Materials" Then
             SeriesNo = "RM-"
@@ -10,6 +12,7 @@
             SeriesNo = "IM-"
         End If
     End Sub
+    
     Sub generateItemNo()
         Dim strID As String
         Try
@@ -42,15 +45,16 @@
         txtAccIncome.Text = ""
         txtAccAsset.Text = ""
         txtUnit.Text = ""
-        txtUnitprice.Text = ""
+        txtPC.Text = "0"
         txtBalQty.Text = "0"
-        txtOqty.Text = "0"
-        txtOunit.Text = ""
-        txtMinStock.Text = ""
+        txtMinQTY.Text = "0"
+        txtUnitCost.Text = "0.00"
+        txtUnitPrice.Text = "0.00"
         chkBuy.Checked = False
         chkSell.Checked = False
         chkInv.Checked = False
         chkboxInactive.Checked = False
+
         cmbItemType.SelectedIndex = -1
     End Sub
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
@@ -70,59 +74,79 @@
 
     Sub SAVE()
         If MsgBox("ARE YOU SURE YOU WANT TO SAVE ITEM ?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "WARNING") = MsgBoxResult.Yes Then
-            Dim inventoryClass As New inventory_class
-            If chkBuy.Checked = True Then
-                inventoryClass.buy = "1"
-            Else
-                inventoryClass.buy = "0"
-            End If
-            If chkSell.Checked = True Then
-                inventoryClass.sell = "1"
-            Else
-                inventoryClass.sell = "0"
-            End If
-            If chkInv.Checked = True Then
-                inventoryClass.inv = "1"
-            Else
-                inventoryClass.inv = "0"
-            End If
-            If chkboxInactive.Checked = True Then
-                inventoryClass.status = "INACTIVE"
-            Else
-                inventoryClass.status = "ACTIVE"
-            End If
-            If txtMinStock.Text = "" Or IsNumeric(txtMinStock.Text) = False Then
-                txtMinStock.Text = "0"
-            End If
-            If btnAdd.Text = "Save Item" Then
-                inventoryClass.command = "Update"
-            ElseIf btnAdd.Text = "Add Item" Then
-                inventoryClass.command = "Add"
-            End If
-            inventoryClass.refNo = "BALANCE"
-            inventoryClass.itemNo = txtItemno.Text
-            inventoryClass.itemdesc = txtItemdesc.Text
-            inventoryClass.unitCost = txtUnitCost.Text
-            inventoryClass.unit = txtUnit.Text
-            inventoryClass.unitprice = txtUnitprice.Text
-            inventoryClass.accCost = txtAccCost.Text
-            inventoryClass.accIncome = txtAccIncome.Text
-            inventoryClass.accAsset = txtAccAsset.Text
-            inventoryClass.minStock = txtMinStock.Text
-            inventoryClass.balanceQty = txtBalQty.Text
-            inventoryClass.ounit = txtOunit.Text
-            inventoryClass.oqty = txtOqty.Text
-            inventoryClass.src = Me.Text
-            inventoryClass.insert_update_inventory_class()
+            Try
+                Dim src As String = Form.ActiveForm.Text
+                Dim Ref As String = "BALANCE"
+                Dim tr_qty As Integer
+                Dim pcQTY As Integer
+                Dim inventoryClass As New inventory_class
+                Dim sc As New systemSettings_class
+                If btnAdd.Text = "Save Item" Then
+                    sc.dc.Connection.ConnectionString = My.Settings.connStringValue
+                    Ref = sc.insert_tr_update_logs(src, txtItemno.Text)
+                    If Ref = "Cancel" Then
+                        Exit Sub
+                    End If
+                    inventoryClass.command = "Update"
+                    tr_qty = CInt(txtBalQty.Text) - cur_balQty
+                    pcQTY = CInt(txtPC.Text) - cur_pcQty
+                    inventoryClass.memo = "ADJUST BALANCE"
+                ElseIf btnAdd.Text = "Add Item" Then
+                    inventoryClass.command = "Add"
+                    tr_qty = CInt(txtBalQty.Text)
+                    pcQTY = CInt(txtPC.Text)
+                    inventoryClass.memo = "BEGINNING BALANCE"
+                End If
+                
+                If chkBuy.Checked = True Then
+                    inventoryClass.buy = "1"
+                Else
+                    inventoryClass.buy = "0"
+                End If
+                If chkSell.Checked = True Then
+                    inventoryClass.sell = "1"
+                Else
+                    inventoryClass.sell = "0"
+                End If
+                If chkInv.Checked = True Then
+                    inventoryClass.inv = "1"
+                Else
+                    inventoryClass.inv = "0"
+                End If
+                If chkboxInactive.Checked = True Then
+                    inventoryClass.status = "INACTIVE"
+                Else
+                    inventoryClass.status = "ACTIVE"
+                End If
 
-            If txtBalQty.Text <> "0" Then
-                inventoryClass.memo = "BEGINNING BALANCE"
-                inventoryClass.debit = CDbl(txtUnitCost.Text) * CDbl(txtBalQty.Text)
+                inventoryClass.src = src
+                inventoryClass.refNo = Ref
+                inventoryClass.itemNo = txtItemno.Text
+                inventoryClass.itemdesc = txtItemdesc.Text
+                inventoryClass.unitCost = txtUnitCost.Text
+                inventoryClass.unit = txtUnit.Text
+                inventoryClass.pcQty = pcQTY
+                inventoryClass.unitprice = txtUnitPrice.Text
+                inventoryClass.accCost = txtAccCost.Text
+                inventoryClass.accIncome = txtAccIncome.Text
+                inventoryClass.accAsset = txtAccAsset.Text
+                inventoryClass.minStock = txtMinQTY.Text
+                inventoryClass.balanceQty = tr_qty
+                inventoryClass.src = Me.Text
+                inventoryClass.insert_update_inventory_class()
+
+                inventoryClass.debit = CDbl(txtUnitCost.Text) * tr_qty
                 inventoryClass.credit = 0
                 inventoryClass.insert_Acc_entry_class()
-            End If
-            saveAccountSettings()
-            Me.Close()
+                saveAccountSettings()
+                Me.Close()
+                MsgBox("Item Saved !", MsgBoxStyle.Information, "Success")
+                If btnAdd.Text = "Save Item" Then
+                    sc.dc.SubmitChanges()
+                End If
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
         End If
     End Sub
     Sub saveAccountSettings()
@@ -152,17 +176,44 @@
         sysSettings.get_settingsValue()
         txtAccAsset.Text = sysSettings.return_settingsValue
     End Sub
+    Sub update_load(ByVal id As String)
 
+        Dim ic As New inventory_class
+        Dim data = ic.get_inv_item_info(id)
+        txtItemdesc.Text = data.ITEMDESC
+        txtAccAsset.Text = data.ASSETACC
+        txtAccCost.Text = data.COSTOFSALESACC
+        txtAccIncome.Text = data.INCOMEACC
+        chkBuy.Checked = ic.check_state(data.BUYABLE)
+        chkSell.Checked = ic.check_state(data.SELLABLE)
+        chkInv.Checked = ic.check_state(data.INVENTORABLE)
+        txtUnit.Text = data.UNIT
+        cur_balQty = data.QTY
+        cur_pcQty = data.PC_QTY
+        txtBalQty.Text = data.QTY
+        txtPC.Text = data.PC_QTY
+        txtUnitPrice.Text = data.UNITPRICE
+        txtMinQTY.Text = data.MINQTY
+        txtUnitCost.Text = Format(data.UNITCOST, "N")
+        cmbItemType.Text = ic.get_ItemType(txtItemno.Text)
+        txtItemno.Enabled = False
+
+    End Sub
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
-        If cmbItemType.Text = "" Or txtUnit.Text = "" Then
+        If cmbItemType.Text = "" Then
             Exit Sub
         End If
         SAVE()
     End Sub
 
     Private Sub cmbItemType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbItemType.SelectedIndexChanged
-        ItemType()
-        generateItemNo()
+        If btnAdd.Text = "Add Item" Then
+            ItemType()
+            generateItemNo()
+        ElseIf btnAdd.Text = "Save Item" Then
+
+        End If
+       
     End Sub
 
     Private Sub frmAddItemsInventory_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
@@ -173,6 +224,7 @@
         If btnAdd.Text = "Add Item" Then
             getAccountSettings()
         ElseIf mode = "Save Item" Then
+            update_load(txtItemno.Text)
         End If
     End Sub
 
@@ -199,5 +251,36 @@
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
+    End Sub
+
+
+
+    Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+       
+    End Sub
+
+
+
+
+    Private Sub Button5_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs)
+      
+
+    End Sub
+
+    Private Sub dgv_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs)
+       
+    End Sub
+
+    Private Sub GroupBox2_Enter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GroupBox2.Enter
+
+    End Sub
+
+    Private Sub Button4_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
+        Dim frm As New frmFinishedItemDesc_Generator
+        frm.generate_clicked = False
+        frm.ShowDialog()
+        If frm.generate_clicked = True Then
+            txtItemdesc.Text = frm.generate_desc
+        End If
     End Sub
 End Class

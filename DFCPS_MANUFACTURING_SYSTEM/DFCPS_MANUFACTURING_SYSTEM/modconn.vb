@@ -4,6 +4,8 @@ Imports System.Data.SqlClient
 Imports System.Data.OleDb
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
+Imports System.Configuration
+
 Module modconn
     Public strSQL As String
     Public OleDBC As New SqlCommand
@@ -19,6 +21,33 @@ Module modconn
     Public last_row_change As DateTime
     Public latest_row_change As DateTime
     Public hasdbupdated As Boolean
+    Public con As String
+
+    Public Function mb(ByVal type As String, ByVal msg As String) As Boolean
+        If type = "reminder" Then
+            MsgBox(msg, MsgBoxStyle.Exclamation, "SYSTEM REMINDER")
+        ElseIf type = "info" Then
+            MsgBox(msg, MsgBoxStyle.Information, "SYSTEM INFORMATION")
+        ElseIf type = "yesnoinfo" Then
+            If MsgBox(msg, MsgBoxStyle.Information + MsgBoxStyle.YesNo, "SYSTEM REMINDER") <> MsgBoxResult.Yes Then
+                Return False
+                Exit Function
+            End If
+        ElseIf type = "yesno" Then
+            If MsgBox(msg, MsgBoxStyle.YesNo, "SYSTEM REMINDER") <> MsgBoxResult.Yes Then
+                Return False
+                Exit Function
+            End If
+        ElseIf type = "yesnoexcla" Then
+            If MsgBox(msg, MsgBoxStyle.YesNo + MsgBoxStyle.Exclamation, "SYSTEM REMINDER") <> MsgBoxResult.Yes Then
+                Return False
+                Exit Function
+            End If
+        ElseIf type = "error" Then
+            MsgBox(msg, MsgBoxStyle.Critical, "SYSTEM ERROR")
+        End If
+        Return True
+    End Function
 
     Public Sub ConnectDatabase()
         'strConnString = "Persist Security Info=False;Integrated Security=true;Initial Catalog=DBMATMONITORINGDBS;server=localhost"
@@ -26,6 +55,7 @@ Module modconn
                         "Initial Catalog=" & My.Settings.mDBname & ";" & _
                         "User ID=" & My.Settings.mUserDB & ";" & _
                         "Password=" & My.Settings.mPassDB
+        My.Settings.connStringValue = strConnString
         conn.ConnectionString = strConnString
         conn.Open()
     End Sub

@@ -2,6 +2,7 @@
 Imports System.Drawing.Printing
 
 Public Class SalesTransactionViewer
+
     Dim rowIndex As Integer
     Public MODE As String
     Dim cardID As String
@@ -17,7 +18,7 @@ Public Class SalesTransactionViewer
     Private pages As Dictionary(Of Integer, pageDetails)
     Dim maxPagesWide As Integer
     Dim maxPagesTall As Integer
-    
+
     Sub GET_SALE_LIST()
         Dim dt As New DataTable
         Try
@@ -34,26 +35,22 @@ Public Class SalesTransactionViewer
             da.Fill(dt)
             DGV.DataSource = dt
             DGV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
-            DGV.AutoResizeColumns()
-            DGV.Columns(1).Width = 100
         Catch ex As Exception
         End Try
     End Sub
-    
+
 
     Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
         GET_SALE_LIST()
     End Sub
 
     Private Sub SalesTransactionViewer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.MdiParent = frmSalesMain
-        GET_SALE_LIST()
     End Sub
 
     Private Sub PrintPreviewDialog1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PrintPreviewDialog1.Load
 
     End Sub
- 
+
     Private mRow As Integer = 0
     Private newpage As Boolean = True
     Private Sub PrintDocument1_BeginPrint(ByVal sender As Object,
@@ -188,10 +185,14 @@ Public Class SalesTransactionViewer
     End Sub
 
     Private Sub PrintJobOrderToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PrintJobOrderToolStripMenuItem.Click
-        prepare_job.MdiParent = frmSalesMain
-        prepare_job.StartPosition = FormStartPosition.CenterParent
-        prepare_job.TXTREF.Text = DGV.CurrentRow.Cells(1).Value
-        prepare_job.Show()
+        Dim frm As New prepare_job
+        frm.MdiParent = frmSalesMain
+        frm.StartPosition = FormStartPosition.CenterParent
+        frm.TXTREF.Text = DGV.CurrentRow.Cells(1).Value
+        frm.get_sales_order_items(DGV.CurrentRow.Cells(1).Value)
+        frm.get_card_id(DGV.CurrentRow.Cells(1).Value)
+        frm.generateNo()
+        frm.Show()
     End Sub
 
     Private Sub DGV_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DGV.CellContentClick
@@ -201,12 +202,242 @@ Public Class SalesTransactionViewer
     Private Sub DGV_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles DGV.MouseDown
         If e.Button = MouseButtons.Right Then
             If DGV.SelectedRows.Count > 0 Then
-                If MODE = "SALES QUOTATION" Then
+                If MODE = "QUOTATION" Then
                     DGV.ContextMenuStrip = cmsSalesQuotation
                 ElseIf MODE = "SALES ORDER" Then
                     DGV.ContextMenuStrip = cmsSalesOrder
+                ElseIf MODE = "JOB ORDER" Then
+                    DGV.ContextMenuStrip = cmsJobOrder
+                    If DGV.CurrentRow.Cells(5).Value = "Job Finished" Then
+                        tmsJobFinished.Enabled = False
+                        tmsUpdate.Enabled = False
+                        tmsCancelJob.Enabled = False
+                    Else
+                        tmsJobFinished.Enabled = True
+                        tmsUpdate.Enabled = True
+                        tmsCancelJob.Enabled = True
+                    End If
+                ElseIf MODE = "SALES CASH INVOICE" Then
+                    DGV.ContextMenuStrip = cmsCashInvoice
+                ElseIf MODE = "SALES CHARGE INVOICE" Then
+                    DGV.ContextMenuStrip = cmsChargeInvoice
+                ElseIf MODE = "SALES DELIVER" Then
+                    DGV.ContextMenuStrip = cmsDeliver
                 End If
             End If
         End If
+    End Sub
+    Sub get_data_update(ByVal param As List(Of String))
+        Dim qc As qry_class
+        qc.qry = "SELECT " & _
+        "tblJobOrder.JONO, " & _
+        "tblJobOrder.[DATE], " & _
+        "tblJobOrder.REFNO, " & _
+        "tblJobOrder.CARDID, " & _
+        "tblJobOrder.REMARKS, " & _
+        "tblJobOrder.ITEMNO, " & _
+        "tblJobOrder.QTY, " & _
+        "tblJobOrder.ONHAND_QTY " & _
+        "FROM " & _
+        "tblJobOrder where JONO = '" & DGV.CurrentRow.Cells(1).Value & "'"
+        Dim dt As DataTable = qc.get_qry_data
+        Dim cdt As New DataTable
+        cdt.Columns.Add("dbcolName")
+        cdt.Columns.Add("parName")
+        cdt.Columns.Add("dbValue")
+        cdt.Columns.Add("parType")
+        Dim res As String()
+        For Each c As DataColumn In dt.Columns
+            If IsNumeric(param.IndexOf(c.ColumnName)) = True Then
+                Dim e As Integer = param.IndexOf(c.ColumnName)
+                res = param.Item(e).Split(",")
+                cdt.Rows.Add(c.ColumnName, res(1), dt.Rows(0).Item(c).ToString, res(2))
+                CType(Me.Controls(res(1)), TextBox).Text = dt.Rows(0).Item(c).ToString
+            End If
+
+        Next
+    End Sub
+
+
+    Private Sub ToolStripMenuItem3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmsPrint.Click
+
+        'Dim sc As New sales_class
+        'sc.print_job_order(DGV.CurrentRow.Cells(1).Value)
+        Dim pc As New print_class
+        Dim sc As New sales_class
+        pc.rptForm = New rpt_JO
+        pc.rptViewer = report_viewer.CrystalReportViewer1
+        pc.reportForm = report_viewer
+        Dim ds As New sales_ds
+        Dim dt As DataTable = ds.Tables("JOTABLE")
+        For Each row In sc.get_info_data(DGV.CurrentRow.Cells(1).Value)
+            dt.Rows.Add(row.job_no, row.trDate, row.CUSTOMER, row.DESCRIPTION, row.QTY, row.REMARKS, row.pDate, MainForm.logo, MainForm.header)
+        Next
+        pc.print_data(dt)
+    End Sub
+
+    Private Sub UpdateToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmsUpdate.Click
+        prepare_job.mode = "Update"
+        prepare_job.get_info_data(DGV.CurrentRow.Cells(1).Value)
+        prepare_job.MdiParent = frmSalesMain
+        prepare_job.StartPosition = FormStartPosition.CenterParent
+        prepare_job.Show()
+    End Sub
+
+    Private Sub ToolStripMenuItem5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmsJobFinished.Click
+
+        Try
+            If MsgBox("Are you sure ?", MsgBoxStyle.YesNo, "SYSTEM REMINDER") = MsgBoxResult.Yes Then
+                Dim sc As New sales_class
+                sc.update_job_data(DGV.CurrentRow.Cells(1).Value, DGV.CurrentRow.Cells(2).Value, DGV.CurrentRow.Cells(3).Value, "Job Finished", "", MainForm.LBLID.Text)
+                MsgBox("STATUS UPDATED", MsgBoxStyle.Information, "SYSTEM INFORMATION")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
+    End Sub
+
+  
+    Private Sub PrintToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PrintToolStripMenuItem.Click
+        Dim sc As New sales_class
+        sc.print_sales(DGV.CurrentRow.Cells(1).Value, "SALES ORDER")
+    End Sub
+
+    Private Sub ToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem1.Click
+
+        Dim sc As New sales_class
+        sc.print_sales(DGV.CurrentRow.Cells(1).Value, "QUOTATION")
+
+    End Sub
+
+    Private Sub ToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem2.Click
+        Dim sc As New sales_class
+        sc.print_sales(DGV.CurrentRow.Cells(1).Value, "SALES CASH INVOICE")
+    End Sub
+
+    Private Sub ToolStripMenuItem3_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem3.Click
+        Dim sc As New sales_class
+        sc.print_DR(DGV.CurrentRow.Cells(1).Value)
+    End Sub
+
+    Private Sub cmsCashInvoice_Opening(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles cmsCashInvoice.Opening
+
+    End Sub
+
+    Private Sub ToolStripMenuItem8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem8.Click
+        Dim sc As New sales_class
+        sc.print_sales(DGV.CurrentRow.Cells(1).Value, "SALES CHARGE INVOICE")
+    End Sub
+
+    Private Sub CancelSalesOrderToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CancelSalesOrderToolStripMenuItem.Click
+        Try
+            If DGV.CurrentRow.Cells(4).Value = "Closed" Or DGV.CurrentRow.Cells(4).Value = "Cancelled" Then
+                MsgBox("This transaction is not available for that command. ", MsgBoxStyle.Critical, "Error")
+            End If
+            If MsgBox("Are you sure ?", MsgBoxStyle.YesNo, "System Reminder") = MsgBoxResult.Yes Then
+                Dim sc As New sales_class
+                sc.update_salesOrder_status(DGV.CurrentRow.Cells(1).Value, "Cancelled")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
+    End Sub
+
+    Private Sub CancelToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CancelToolStripMenuItem.Click
+        Try
+            If MsgBox("Are you sure ?", MsgBoxStyle.YesNo, "System Reminder") = MsgBoxResult.Yes Then
+                Dim sc As New sales_class
+                sc.update_salesQuotation_status(DGV.CurrentRow.Cells(1).Value, "Cancelled")
+            End If
+            MsgBox("STATUS UPDATED", MsgBoxStyle.Information, "SYSTEM INFORMATION")
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
+    End Sub
+
+    Private Sub CancelInvoiceToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CancelInvoiceToolStripMenuItem.Click
+        Try
+            If DGV.CurrentRow.Cells(4).Value = "All ordered items delivered" Or DGV.CurrentRow.Cells(4).Value = "Cancelled" Then
+                MsgBox("This transaction is not available for that command. ", MsgBoxStyle.Critical, "Error")
+
+                Exit Sub
+
+            End If
+            If MsgBox("Are you sure ?", MsgBoxStyle.YesNo, "System Reminder") = MsgBoxResult.Yes Then
+                Dim sc As New sales_class
+                sc.update_salesCash_status(DGV.CurrentRow.Cells(1).Value, "Cancelled")
+                Dim ac As New Account_Class
+                ac.reverse_accEntry(DGV.CurrentRow.Cells(1).Value, "Cancelled")
+                MsgBox("STATUS UPDATED", MsgBoxStyle.Information, "SYSTEM INFORMATION")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
+    End Sub
+
+    Private Sub tmsCancelJob_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmsCancelJob.Click
+        Try
+            If DGV.CurrentRow.Cells(4).Value = "Job Finished" Or DGV.CurrentRow.Cells(4).Value = "Cancelled" Then
+                MsgBox("This transaction is not available for that command. ", MsgBoxStyle.Critical, "Error")
+                Exit Sub
+            Else
+                If MsgBox("Are you sure ?", MsgBoxStyle.YesNo, "System Reminder") = MsgBoxResult.Yes Then
+                    Dim sc As New sales_class
+                    sc.update_job_data(DGV.CurrentRow.Cells(1).Value, DGV.CurrentRow.Cells(2).Value, DGV.CurrentRow.Cells(3).Value, "Job Finished", "", MainForm.LBLID.Text)
+                    MsgBox("STATUS UPDATED", MsgBoxStyle.Information, "SYSTEM INFORMATION")
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
+    End Sub
+
+    Private Sub ToolStripMenuItem6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem6.Click
+        Try
+            If DGV.CurrentRow.Cells(4).Value = "Cancelled" Then
+                MsgBox("This transaction is not available for that command. ", MsgBoxStyle.Critical, "Error")
+                Exit Sub
+            End If
+            If MsgBox("Are you sure ?", MsgBoxStyle.YesNo, "System Reminder") = MsgBoxResult.Yes Then
+                Dim sc As New sales_class
+                sc.update_salesDeliver_status(DGV.CurrentRow.Cells(1).Value, "Cancelled")
+                Dim ac As New Account_Class
+                ac.reverse_accEntry(DGV.CurrentRow.Cells(1).Value, "Cancelled")
+                Dim inv_ds As New invtry_dsTableAdapters.tblItemTransactionTableAdapter
+                inv_ds.Connection.ConnectionString = My.Settings.connStringValue
+                inv_ds.reverseInvtry(DGV.CurrentRow.Cells(1).Value)
+                MsgBox("STATUS UPDATED", MsgBoxStyle.Information, "SYSTEM INFORMATION")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
+      
+    End Sub
+
+    Private Sub ToolStripMenuItem11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem11.Click
+        Try
+            If DGV.CurrentRow.Cells(4).Value = "All ordered items delivered" Or DGV.CurrentRow.Cells(4).Value = "Cancelled" Then
+                MsgBox("This transaction is not available for that command. ", MsgBoxStyle.Critical, "Error")
+                Exit Sub
+            End If
+            If MsgBox("Are you sure ?", MsgBoxStyle.YesNo, "System Reminder") = MsgBoxResult.Yes Then
+                Dim sc As New sales_class
+                sc.update_salesCharge_status(DGV.CurrentRow.Cells(1).Value, "Cancelled")
+                Dim ac As New Account_Class
+                ac.reverse_accEntry(DGV.CurrentRow.Cells(1).Value, "Cancelled")
+                MsgBox("STATUS UPDATED", MsgBoxStyle.Information, "SYSTEM INFORMATION")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
+    End Sub
+
+    Private Sub UpdateToolStripMenuItem_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UpdateToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub PrintDeliveryToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PrintDeliveryToolStripMenuItem.Click
+        Dim sc As New sales_class
+        sc.print_sales(DGV.CurrentRow.Cells(1).Value, "SALES DELIVER")
     End Sub
 End Class

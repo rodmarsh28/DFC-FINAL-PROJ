@@ -117,34 +117,24 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=localhost;Initial Catalog=DFCPS_MANUFACTURING_DB;User ID=sa;Password="& _ 
-            "passwork")>  _
-        Public ReadOnly Property DFCPS_MANUFACTURING_DBConnectionString() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=localhost;Initial Catalog=DFCPS_MANAGEMENT_DB;User ID=sa;Password=pas"& _ 
+            "swork")>  _
+        Public ReadOnly Property connString() As String
             Get
-                Return CType(Me("DFCPS_MANUFACTURING_DBConnectionString"),String)
+                Return CType(Me("connString"),String)
             End Get
         End Property
         
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=localhost;Initial Catalog=DFCPS_MANAGEMENT_DB;Persist Security Info=T"& _ 
-            "rue;User ID=sa")>  _
-        Public ReadOnly Property DFCPS_MANAGEMENT_DBConnectionString() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property connStringValue() As String
             Get
-                Return CType(Me("DFCPS_MANAGEMENT_DBConnectionString"),String)
+                Return CType(Me("connStringValue"),String)
             End Get
-        End Property
-        
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=localhost;Initial Catalog=DFCPS_MANAGEMENT_DB;Persist Security Info=T"& _ 
-            "rue;User ID=sa;Password=passwork")>  _
-        Public ReadOnly Property DFCPS_MANAGEMENT_DBConnectionString1() As String
-            Get
-                Return CType(Me("DFCPS_MANAGEMENT_DBConnectionString1"),String)
-            End Get
+            Set
+                Me("connStringValue") = value
+            End Set
         End Property
     End Class
 End Namespace
@@ -157,9 +147,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.DFCPS_MANUFACTURING_SYSTEM.My.MySettings
+        Friend ReadOnly Property Settings() As Global.DFCPS_MANAGEMENT_SYSTEM.My.MySettings
             Get
-                Return Global.DFCPS_MANUFACTURING_SYSTEM.My.MySettings.Default
+                Return Global.DFCPS_MANAGEMENT_SYSTEM.My.MySettings.Default
             End Get
         End Property
     End Module

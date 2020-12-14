@@ -1,11 +1,13 @@
 ﻿Imports System.Data.SqlClient
 
 Public Class inventory_class
+    Public pCount As String
     Public command As String
     Public itemNo As String
     Public itemdesc As String
     Public unitCost As Double
     Public unit As String
+    Public unitWt As Double
     Public unitprice As Double
     Public buy As String
     Public sell As String
@@ -17,6 +19,7 @@ Public Class inventory_class
     Public status As String
     Public balanceQty As Integer
     Public qty As Integer
+    Public pcQty As Integer
     Public src As String
 
     Public entryMode As String
@@ -39,8 +42,10 @@ Public Class inventory_class
     Public ounit As String
     Public cardid As String
     Public dtable As New DataTable
-
+    Public qry_data
+    Public isDefault As Integer
     Property SearchValue As String
+    Public rsltData
 
 
 
@@ -51,11 +56,13 @@ Public Class inventory_class
             checkConn()
             With cmd
                 .CommandType = CommandType.StoredProcedure
+                .Parameters.AddWithValue("@REF", SqlDbType.VarChar).Value = refNo
                 .Parameters.AddWithValue("@command", SqlDbType.VarChar).Value = command
                 .Parameters.AddWithValue("@itemNo", SqlDbType.VarChar).Value = itemNo
                 .Parameters.AddWithValue("@itemdesc", SqlDbType.VarChar).Value = itemdesc
                 .Parameters.AddWithValue("@unitCost", SqlDbType.Decimal).Value = unitCost
                 .Parameters.AddWithValue("@unit", SqlDbType.VarChar).Value = unit
+                .Parameters.AddWithValue("@pcQTY", SqlDbType.VarChar).Value = pcQty
                 .Parameters.AddWithValue("@unitprice", SqlDbType.Decimal).Value = unitprice
                 .Parameters.AddWithValue("@buy", SqlDbType.VarChar).Value = buy
                 .Parameters.AddWithValue("@sell", SqlDbType.VarChar).Value = sell
@@ -66,16 +73,40 @@ Public Class inventory_class
                 .Parameters.AddWithValue("@minStock", SqlDbType.Int).Value = minStock
                 .Parameters.AddWithValue("@status", SqlDbType.VarChar).Value = status
                 .Parameters.AddWithValue("@balanceQty", SqlDbType.Int).Value = balanceQty
-                .Parameters.AddWithValue("@oqty", SqlDbType.Int).Value = oqty
-                .Parameters.AddWithValue("@ounit", SqlDbType.Int).Value = ounit
-                .Parameters.AddWithValue("@src", SqlDbType.VarChar).Value = Form.ActiveForm.Text
+                .Parameters.AddWithValue("@src", SqlDbType.VarChar).Value = src
             End With
             cmd.ExecuteNonQuery()
-            MsgBox("Item Saved !", MsgBoxStyle.Information, "Success")
+
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
     End Sub
+    Public Function get_inv_item_info(ByVal id As String) As DFCPS_MANAGEMENT_SYSTEM.InventoryListAllView
+        Dim inv_ds As New salesDataContext
+        inv_ds.Connection.ConnectionString = My.Settings.connStringValue
+        Dim data = (From inv In inv_ds.InventoryListAllViews _
+                    Where inv.ITEMNO = id _
+                    Select inv).FirstOrDefault
+        Return data
+    End Function
+    Public Function get_ItemType(ByVal value As String) As String
+        If value.Contains("RM-") Then
+            Return "Raw Materials"
+        ElseIf value.Contains("WP-") Then
+            Return "Finish Product"
+        ElseIf value.Contains("IM-") Then
+            Return "Item, Materials & Supplies"
+        Else
+            Return "UNDEFINED ITEM TYPE"
+        End If
+    End Function
+    Public Function check_state(ByVal value As String) As Boolean
+        If value = 1 Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
 
     Public Sub insert_Acc_entry_class()
         Try
@@ -110,7 +141,7 @@ Public Class inventory_class
                 .Parameters.AddWithValue("@unitCost", SqlDbType.Decimal).Value = unitCost
                 .Parameters.AddWithValue("@qty", SqlDbType.Int).Value = qty
                 .Parameters.AddWithValue("@job", SqlDbType.Int).Value = job
-                .Parameters.AddWithValue("@oqty", SqlDbType.Int).Value = oqty
+                .Parameters.AddWithValue("@pcQty", SqlDbType.Int).Value = pcQty
             End With
             cmd.ExecuteNonQuery()
         Catch ex As Exception

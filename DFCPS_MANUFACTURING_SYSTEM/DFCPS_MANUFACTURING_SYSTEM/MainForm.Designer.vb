@@ -34,13 +34,13 @@ Partial Class MainForm
         Me.ACCOUNTToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MANAGEACCOUNTToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.REGISTERACCOUNTToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MANAGECHARTOFACCOUNTSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SYSTEMREPORTSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.REPORTSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LOGSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ABOUTToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SYSTEMSETTINGSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ABOUTToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CheckForUpdatesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -56,12 +56,14 @@ Partial Class MainForm
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.MetroButton6 = New MetroFramework.Controls.MetroButton()
-        Me.MetroButton5 = New MetroFramework.Controls.MetroButton()
-        Me.MetroButton4 = New MetroFramework.Controls.MetroButton()
-        Me.MetroButton3 = New MetroFramework.Controls.MetroButton()
-        Me.MetroButton2 = New MetroFramework.Controls.MetroButton()
-        Me.MetroButton1 = New MetroFramework.Controls.MetroButton()
+        Me.btnPurchasing = New MetroFramework.Controls.MetroButton()
+        Me.btnSales = New MetroFramework.Controls.MetroButton()
+        Me.btnProd = New MetroFramework.Controls.MetroButton()
+        Me.btnHR = New MetroFramework.Controls.MetroButton()
+        Me.btnInventory = New MetroFramework.Controls.MetroButton()
+        Me.btnAccounting = New MetroFramework.Controls.MetroButton()
+        Me.REQUESTEDFORAPPROVALToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TRANSACTIONToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -72,7 +74,7 @@ Partial Class MainForm
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer))
+        Me.StatusStrip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.LBLID, Me.ToolStripStatusLabel3, Me.LBLNAME, Me.ToolStripStatusLabel5, Me.LBLPOS})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 610)
         Me.StatusStrip1.Name = "StatusStrip1"
@@ -124,37 +126,33 @@ Partial Class MainForm
         '
         'ACCOUNTToolStripMenuItem
         '
-        Me.ACCOUNTToolStripMenuItem.BackColor = System.Drawing.Color.Gray
-        Me.ACCOUNTToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MANAGEACCOUNTToolStripMenuItem, Me.REGISTERACCOUNTToolStripMenuItem, Me.MANAGECHARTOFACCOUNTSToolStripMenuItem})
-        Me.ACCOUNTToolStripMenuItem.ForeColor = System.Drawing.Color.Black
-        Me.ACCOUNTToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Transparent
+        Me.ACCOUNTToolStripMenuItem.BackColor = System.Drawing.Color.Transparent
+        Me.ACCOUNTToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MANAGEACCOUNTToolStripMenuItem, Me.REGISTERACCOUNTToolStripMenuItem})
+        Me.ACCOUNTToolStripMenuItem.ForeColor = System.Drawing.Color.White
+        Me.ACCOUNTToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(94, Byte), Integer), CType(CType(32, Byte), Integer))
         Me.ACCOUNTToolStripMenuItem.Name = "ACCOUNTToolStripMenuItem"
         Me.ACCOUNTToolStripMenuItem.Size = New System.Drawing.Size(99, 25)
         Me.ACCOUNTToolStripMenuItem.Text = "ACCOUNT"
         '
         'MANAGEACCOUNTToolStripMenuItem
         '
+        Me.MANAGEACCOUNTToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(232, Byte), Integer), CType(CType(245, Byte), Integer), CType(CType(233, Byte), Integer))
         Me.MANAGEACCOUNTToolStripMenuItem.Name = "MANAGEACCOUNTToolStripMenuItem"
-        Me.MANAGEACCOUNTToolStripMenuItem.Size = New System.Drawing.Size(320, 26)
+        Me.MANAGEACCOUNTToolStripMenuItem.Size = New System.Drawing.Size(242, 26)
         Me.MANAGEACCOUNTToolStripMenuItem.Text = "MANAGE ACCOUNTS"
         '
         'REGISTERACCOUNTToolStripMenuItem
         '
+        Me.REGISTERACCOUNTToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(232, Byte), Integer), CType(CType(245, Byte), Integer), CType(CType(233, Byte), Integer))
         Me.REGISTERACCOUNTToolStripMenuItem.Name = "REGISTERACCOUNTToolStripMenuItem"
-        Me.REGISTERACCOUNTToolStripMenuItem.Size = New System.Drawing.Size(320, 26)
+        Me.REGISTERACCOUNTToolStripMenuItem.Size = New System.Drawing.Size(242, 26)
         Me.REGISTERACCOUNTToolStripMenuItem.Text = "REGISTER ACCOUNTS"
-        '
-        'MANAGECHARTOFACCOUNTSToolStripMenuItem
-        '
-        Me.MANAGECHARTOFACCOUNTSToolStripMenuItem.Name = "MANAGECHARTOFACCOUNTSToolStripMenuItem"
-        Me.MANAGECHARTOFACCOUNTSToolStripMenuItem.Size = New System.Drawing.Size(320, 26)
-        Me.MANAGECHARTOFACCOUNTSToolStripMenuItem.Text = "MANAGE CHART OF ACCOUNTS"
         '
         'SYSTEMREPORTSToolStripMenuItem
         '
-        Me.SYSTEMREPORTSToolStripMenuItem.BackColor = System.Drawing.Color.Gray
-        Me.SYSTEMREPORTSToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.REPORTSToolStripMenuItem, Me.LOGSToolStripMenuItem})
-        Me.SYSTEMREPORTSToolStripMenuItem.ForeColor = System.Drawing.Color.Black
+        Me.SYSTEMREPORTSToolStripMenuItem.BackColor = System.Drawing.Color.Transparent
+        Me.SYSTEMREPORTSToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.REPORTSToolStripMenuItem, Me.LOGSToolStripMenuItem, Me.REQUESTEDFORAPPROVALToolStripMenuItem})
+        Me.SYSTEMREPORTSToolStripMenuItem.ForeColor = System.Drawing.Color.White
         Me.SYSTEMREPORTSToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black
         Me.SYSTEMREPORTSToolStripMenuItem.Name = "SYSTEMREPORTSToolStripMenuItem"
         Me.SYSTEMREPORTSToolStripMenuItem.Size = New System.Drawing.Size(83, 25)
@@ -162,21 +160,23 @@ Partial Class MainForm
         '
         'REPORTSToolStripMenuItem
         '
+        Me.REPORTSToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(232, Byte), Integer), CType(CType(245, Byte), Integer), CType(CType(233, Byte), Integer))
         Me.REPORTSToolStripMenuItem.Name = "REPORTSToolStripMenuItem"
-        Me.REPORTSToolStripMenuItem.Size = New System.Drawing.Size(149, 26)
+        Me.REPORTSToolStripMenuItem.Size = New System.Drawing.Size(152, 26)
         Me.REPORTSToolStripMenuItem.Text = "REPORTS"
         '
         'LOGSToolStripMenuItem
         '
+        Me.LOGSToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(232, Byte), Integer), CType(CType(245, Byte), Integer), CType(CType(233, Byte), Integer))
         Me.LOGSToolStripMenuItem.Name = "LOGSToolStripMenuItem"
-        Me.LOGSToolStripMenuItem.Size = New System.Drawing.Size(149, 26)
+        Me.LOGSToolStripMenuItem.Size = New System.Drawing.Size(152, 26)
         Me.LOGSToolStripMenuItem.Text = "LOGS"
         '
         'ABOUTToolStripMenuItem
         '
-        Me.ABOUTToolStripMenuItem.BackColor = System.Drawing.Color.Gray
+        Me.ABOUTToolStripMenuItem.BackColor = System.Drawing.Color.Transparent
         Me.ABOUTToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SYSTEMSETTINGSToolStripMenuItem})
-        Me.ABOUTToolStripMenuItem.ForeColor = System.Drawing.Color.Black
+        Me.ABOUTToolStripMenuItem.ForeColor = System.Drawing.Color.White
         Me.ABOUTToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black
         Me.ABOUTToolStripMenuItem.Name = "ABOUTToolStripMenuItem"
         Me.ABOUTToolStripMenuItem.Size = New System.Drawing.Size(92, 25)
@@ -184,20 +184,30 @@ Partial Class MainForm
         '
         'SYSTEMSETTINGSToolStripMenuItem
         '
+        Me.SYSTEMSETTINGSToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(232, Byte), Integer), CType(CType(245, Byte), Integer), CType(CType(233, Byte), Integer))
         Me.SYSTEMSETTINGSToolStripMenuItem.Name = "SYSTEMSETTINGSToolStripMenuItem"
         Me.SYSTEMSETTINGSToolStripMenuItem.Size = New System.Drawing.Size(219, 26)
         Me.SYSTEMSETTINGSToolStripMenuItem.Text = "SYSTEM SETTINGS"
         '
         'ABOUTToolStripMenuItem1
         '
-        Me.ABOUTToolStripMenuItem1.BackColor = System.Drawing.Color.Gray
+        Me.ABOUTToolStripMenuItem1.BackColor = System.Drawing.Color.Transparent
+        Me.ABOUTToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CheckForUpdatesToolStripMenuItem})
+        Me.ABOUTToolStripMenuItem1.ForeColor = System.Drawing.Color.White
         Me.ABOUTToolStripMenuItem1.Name = "ABOUTToolStripMenuItem1"
         Me.ABOUTToolStripMenuItem1.Size = New System.Drawing.Size(76, 25)
         Me.ABOUTToolStripMenuItem1.Text = "ABOUT"
         '
+        'CheckForUpdatesToolStripMenuItem
+        '
+        Me.CheckForUpdatesToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(232, Byte), Integer), CType(CType(245, Byte), Integer), CType(CType(233, Byte), Integer))
+        Me.CheckForUpdatesToolStripMenuItem.Name = "CheckForUpdatesToolStripMenuItem"
+        Me.CheckForUpdatesToolStripMenuItem.Size = New System.Drawing.Size(217, 26)
+        Me.CheckForUpdatesToolStripMenuItem.Text = "Check for updates"
+        '
         'MenuStrip1
         '
-        Me.MenuStrip1.BackColor = System.Drawing.Color.Gray
+        Me.MenuStrip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.MenuStrip1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ACCOUNTToolStripMenuItem, Me.SYSTEMREPORTSToolStripMenuItem, Me.ABOUTToolStripMenuItem, Me.ABOUTToolStripMenuItem1})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
@@ -208,7 +218,7 @@ Partial Class MainForm
         '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer), CType(CType(33, Byte), Integer))
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.Panel1.Controls.Add(Me.Button2)
         Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.PictureBox1)
@@ -220,7 +230,7 @@ Partial Class MainForm
         '
         'Panel2
         '
-        Me.Panel2.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(94, Byte), Integer), CType(CType(32, Byte), Integer))
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Cursor = System.Windows.Forms.Cursors.Default
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
@@ -237,24 +247,25 @@ Partial Class MainForm
         Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.Label1.Location = New System.Drawing.Point(28, 31)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(458, 31)
+        Me.Label1.Size = New System.Drawing.Size(481, 31)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "| GFLS MANAGEMENT SYSTEM |"
+        Me.Label1.Text = "| DFCPS MANAGEMENT SYSTEM |"
         '
         'Panel3
         '
         Me.Panel3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel3.Controls.Add(Me.MetroButton6)
+        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(251, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(252, Byte), Integer))
+        Me.Panel3.Controls.Add(Me.btnPurchasing)
         Me.Panel3.Controls.Add(Me.Label7)
-        Me.Panel3.Controls.Add(Me.MetroButton5)
+        Me.Panel3.Controls.Add(Me.btnSales)
         Me.Panel3.Controls.Add(Me.Label6)
-        Me.Panel3.Controls.Add(Me.MetroButton4)
+        Me.Panel3.Controls.Add(Me.btnProd)
         Me.Panel3.Controls.Add(Me.Label5)
-        Me.Panel3.Controls.Add(Me.MetroButton3)
-        Me.Panel3.Controls.Add(Me.MetroButton2)
-        Me.Panel3.Controls.Add(Me.MetroButton1)
+        Me.Panel3.Controls.Add(Me.btnHR)
+        Me.Panel3.Controls.Add(Me.btnInventory)
+        Me.Panel3.Controls.Add(Me.btnAccounting)
         Me.Panel3.Controls.Add(Me.Label4)
         Me.Panel3.Controls.Add(Me.Label3)
         Me.Panel3.Controls.Add(Me.Label2)
@@ -330,7 +341,7 @@ Partial Class MainForm
         '
         'Button2
         '
-        Me.Button2.BackColor = System.Drawing.Color.White
+        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(248, Byte), Integer))
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
         Me.Button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -345,7 +356,7 @@ Partial Class MainForm
         '
         'Button1
         '
-        Me.Button1.BackColor = System.Drawing.Color.White
+        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(248, Byte), Integer))
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -369,77 +380,91 @@ Partial Class MainForm
         Me.PictureBox1.TabIndex = 4
         Me.PictureBox1.TabStop = False
         '
-        'MetroButton6
+        'btnPurchasing
         '
-        Me.MetroButton6.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.MetroButton6.AutoSize = True
-        Me.MetroButton6.BackgroundImage = CType(resources.GetObject("MetroButton6.BackgroundImage"), System.Drawing.Image)
-        Me.MetroButton6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.MetroButton6.Location = New System.Drawing.Point(1015, 605)
-        Me.MetroButton6.Name = "MetroButton6"
-        Me.MetroButton6.Size = New System.Drawing.Size(174, 181)
-        Me.MetroButton6.TabIndex = 29
-        Me.MetroButton6.UseSelectable = True
+        Me.btnPurchasing.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.btnPurchasing.AutoSize = True
+        Me.btnPurchasing.BackgroundImage = CType(resources.GetObject("btnPurchasing.BackgroundImage"), System.Drawing.Image)
+        Me.btnPurchasing.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnPurchasing.Location = New System.Drawing.Point(1015, 605)
+        Me.btnPurchasing.Name = "btnPurchasing"
+        Me.btnPurchasing.Size = New System.Drawing.Size(174, 181)
+        Me.btnPurchasing.TabIndex = 29
+        Me.btnPurchasing.UseSelectable = True
         '
-        'MetroButton5
+        'btnSales
         '
-        Me.MetroButton5.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.MetroButton5.AutoSize = True
-        Me.MetroButton5.BackgroundImage = CType(resources.GetObject("MetroButton5.BackgroundImage"), System.Drawing.Image)
-        Me.MetroButton5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.MetroButton5.Location = New System.Drawing.Point(671, 606)
-        Me.MetroButton5.Name = "MetroButton5"
-        Me.MetroButton5.Size = New System.Drawing.Size(174, 181)
-        Me.MetroButton5.TabIndex = 27
-        Me.MetroButton5.UseSelectable = True
+        Me.btnSales.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.btnSales.AutoSize = True
+        Me.btnSales.BackgroundImage = CType(resources.GetObject("btnSales.BackgroundImage"), System.Drawing.Image)
+        Me.btnSales.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnSales.Location = New System.Drawing.Point(671, 606)
+        Me.btnSales.Name = "btnSales"
+        Me.btnSales.Size = New System.Drawing.Size(174, 181)
+        Me.btnSales.TabIndex = 27
+        Me.btnSales.UseSelectable = True
         '
-        'MetroButton4
+        'btnProd
         '
-        Me.MetroButton4.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.MetroButton4.AutoSize = True
-        Me.MetroButton4.BackgroundImage = CType(resources.GetObject("MetroButton4.BackgroundImage"), System.Drawing.Image)
-        Me.MetroButton4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.MetroButton4.Location = New System.Drawing.Point(320, 605)
-        Me.MetroButton4.Name = "MetroButton4"
-        Me.MetroButton4.Size = New System.Drawing.Size(174, 181)
-        Me.MetroButton4.TabIndex = 25
-        Me.MetroButton4.UseSelectable = True
+        Me.btnProd.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.btnProd.AutoSize = True
+        Me.btnProd.BackgroundImage = CType(resources.GetObject("btnProd.BackgroundImage"), System.Drawing.Image)
+        Me.btnProd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnProd.Location = New System.Drawing.Point(320, 605)
+        Me.btnProd.Name = "btnProd"
+        Me.btnProd.Size = New System.Drawing.Size(174, 181)
+        Me.btnProd.TabIndex = 25
+        Me.btnProd.UseSelectable = True
         '
-        'MetroButton3
+        'btnHR
         '
-        Me.MetroButton3.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.MetroButton3.AutoSize = True
-        Me.MetroButton3.BackgroundImage = CType(resources.GetObject("MetroButton3.BackgroundImage"), System.Drawing.Image)
-        Me.MetroButton3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.MetroButton3.Location = New System.Drawing.Point(1013, 356)
-        Me.MetroButton3.Name = "MetroButton3"
-        Me.MetroButton3.Size = New System.Drawing.Size(174, 181)
-        Me.MetroButton3.TabIndex = 23
-        Me.MetroButton3.UseSelectable = True
+        Me.btnHR.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.btnHR.AutoSize = True
+        Me.btnHR.BackgroundImage = CType(resources.GetObject("btnHR.BackgroundImage"), System.Drawing.Image)
+        Me.btnHR.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnHR.ForeColor = System.Drawing.Color.Transparent
+        Me.btnHR.Location = New System.Drawing.Point(1013, 356)
+        Me.btnHR.Name = "btnHR"
+        Me.btnHR.Size = New System.Drawing.Size(174, 181)
+        Me.btnHR.TabIndex = 23
+        Me.btnHR.UseSelectable = True
         '
-        'MetroButton2
+        'btnInventory
         '
-        Me.MetroButton2.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.MetroButton2.AutoSize = True
-        Me.MetroButton2.BackgroundImage = CType(resources.GetObject("MetroButton2.BackgroundImage"), System.Drawing.Image)
-        Me.MetroButton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.MetroButton2.Location = New System.Drawing.Point(669, 356)
-        Me.MetroButton2.Name = "MetroButton2"
-        Me.MetroButton2.Size = New System.Drawing.Size(174, 181)
-        Me.MetroButton2.TabIndex = 22
-        Me.MetroButton2.UseSelectable = True
+        Me.btnInventory.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.btnInventory.AutoSize = True
+        Me.btnInventory.BackgroundImage = CType(resources.GetObject("btnInventory.BackgroundImage"), System.Drawing.Image)
+        Me.btnInventory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnInventory.Location = New System.Drawing.Point(669, 356)
+        Me.btnInventory.Name = "btnInventory"
+        Me.btnInventory.Size = New System.Drawing.Size(174, 181)
+        Me.btnInventory.TabIndex = 22
+        Me.btnInventory.UseSelectable = True
         '
-        'MetroButton1
+        'btnAccounting
         '
-        Me.MetroButton1.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.MetroButton1.AutoSize = True
-        Me.MetroButton1.BackgroundImage = CType(resources.GetObject("MetroButton1.BackgroundImage"), System.Drawing.Image)
-        Me.MetroButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.MetroButton1.Location = New System.Drawing.Point(317, 356)
-        Me.MetroButton1.Name = "MetroButton1"
-        Me.MetroButton1.Size = New System.Drawing.Size(174, 181)
-        Me.MetroButton1.TabIndex = 21
-        Me.MetroButton1.UseSelectable = True
+        Me.btnAccounting.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.btnAccounting.AutoSize = True
+        Me.btnAccounting.BackgroundImage = CType(resources.GetObject("btnAccounting.BackgroundImage"), System.Drawing.Image)
+        Me.btnAccounting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnAccounting.Location = New System.Drawing.Point(317, 356)
+        Me.btnAccounting.Name = "btnAccounting"
+        Me.btnAccounting.Size = New System.Drawing.Size(174, 181)
+        Me.btnAccounting.TabIndex = 21
+        Me.btnAccounting.UseSelectable = True
+        '
+        'REQUESTEDFORAPPROVALToolStripMenuItem
+        '
+        Me.REQUESTEDFORAPPROVALToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TRANSACTIONToolStripMenuItem})
+        Me.REQUESTEDFORAPPROVALToolStripMenuItem.Name = "REQUESTEDFORAPPROVALToolStripMenuItem"
+        Me.REQUESTEDFORAPPROVALToolStripMenuItem.Size = New System.Drawing.Size(291, 26)
+        Me.REQUESTEDFORAPPROVALToolStripMenuItem.Text = "REQUESTED FOR APPROVAL"
+        '
+        'TRANSACTIONToolStripMenuItem
+        '
+        Me.TRANSACTIONToolStripMenuItem.Name = "TRANSACTIONToolStripMenuItem"
+        Me.TRANSACTIONToolStripMenuItem.Size = New System.Drawing.Size(192, 26)
+        Me.TRANSACTIONToolStripMenuItem.Text = "TRANSACTION"
         '
         'MainForm
         '
@@ -482,7 +507,6 @@ Partial Class MainForm
     Friend WithEvents ACCOUNTToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MANAGEACCOUNTToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents REGISTERACCOUNTToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MANAGECHARTOFACCOUNTSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SYSTEMREPORTSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents REPORTSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents LOGSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -497,17 +521,20 @@ Partial Class MainForm
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Panel3 As System.Windows.Forms.Panel
-    Friend WithEvents MetroButton6 As MetroFramework.Controls.MetroButton
+    Friend WithEvents btnPurchasing As MetroFramework.Controls.MetroButton
     Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents MetroButton5 As MetroFramework.Controls.MetroButton
+    Friend WithEvents btnSales As MetroFramework.Controls.MetroButton
     Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents MetroButton4 As MetroFramework.Controls.MetroButton
+    Friend WithEvents btnProd As MetroFramework.Controls.MetroButton
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents MetroButton3 As MetroFramework.Controls.MetroButton
-    Friend WithEvents MetroButton2 As MetroFramework.Controls.MetroButton
-    Friend WithEvents MetroButton1 As MetroFramework.Controls.MetroButton
+    Friend WithEvents btnHR As MetroFramework.Controls.MetroButton
+    Friend WithEvents btnInventory As MetroFramework.Controls.MetroButton
+    Friend WithEvents btnAccounting As MetroFramework.Controls.MetroButton
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
+    Friend WithEvents CheckForUpdatesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents REQUESTEDFORAPPROVALToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents TRANSACTIONToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

@@ -23,7 +23,7 @@ Partial Class prepare_job
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TXTCUS = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -42,7 +42,13 @@ Partial Class prepare_job
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.JOBBS = New System.Windows.Forms.BindingSource(Me.components)
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.dtpPdate = New System.Windows.Forms.DateTimePicker()
+        Me.Button6 = New System.Windows.Forms.Button()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.JOBBS, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TXTCUS
@@ -50,7 +56,7 @@ Partial Class prepare_job
         Me.TXTCUS.Enabled = False
         Me.TXTCUS.Location = New System.Drawing.Point(113, 49)
         Me.TXTCUS.Name = "TXTCUS"
-        Me.TXTCUS.Size = New System.Drawing.Size(801, 20)
+        Me.TXTCUS.Size = New System.Drawing.Size(733, 20)
         Me.TXTCUS.TabIndex = 65
         '
         'Label3
@@ -102,14 +108,13 @@ Partial Class prepare_job
         '
         Me.dgv.AllowUserToAddRows = False
         Me.dgv.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.Azure
-        Me.dgv.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.Azure
+        Me.dgv.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
         Me.dgv.BackgroundColor = System.Drawing.Color.White
         Me.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column6, Me.Column4, Me.Column7})
         Me.dgv.Location = New System.Drawing.Point(15, 112)
         Me.dgv.Name = "dgv"
-        Me.dgv.ReadOnly = True
         Me.dgv.Size = New System.Drawing.Size(912, 148)
         Me.dgv.TabIndex = 104
         '
@@ -118,14 +123,12 @@ Partial Class prepare_job
         Me.Column1.Frozen = True
         Me.Column1.HeaderText = "Item #"
         Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
         '
         'Column2
         '
         Me.Column2.Frozen = True
         Me.Column2.HeaderText = "Description"
         Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
         Me.Column2.Width = 350
         '
         'Column3
@@ -133,7 +136,6 @@ Partial Class prepare_job
         Me.Column3.Frozen = True
         Me.Column3.HeaderText = "Unit"
         Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = True
         Me.Column3.Width = 110
         '
         'Column6
@@ -141,25 +143,22 @@ Partial Class prepare_job
         Me.Column6.Frozen = True
         Me.Column6.HeaderText = "Request Qty"
         Me.Column6.Name = "Column6"
-        Me.Column6.ReadOnly = True
         '
         'Column4
         '
         Me.Column4.Frozen = True
         Me.Column4.HeaderText = "Onhand Qty"
         Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = True
         '
         'Column7
         '
         Me.Column7.HeaderText = "Job order"
         Me.Column7.Name = "Column7"
-        Me.Column7.ReadOnly = True
         '
         'TXTREF
         '
         Me.TXTREF.ForeColor = System.Drawing.Color.Maroon
-        Me.TXTREF.Location = New System.Drawing.Point(792, 12)
+        Me.TXTREF.Location = New System.Drawing.Point(727, 22)
         Me.TXTREF.Name = "TXTREF"
         Me.TXTREF.Size = New System.Drawing.Size(122, 20)
         Me.TXTREF.TabIndex = 116
@@ -167,7 +166,7 @@ Partial Class prepare_job
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(739, 15)
+        Me.Label1.Location = New System.Drawing.Point(683, 25)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(38, 13)
         Me.Label1.TabIndex = 115
@@ -191,12 +190,52 @@ Partial Class prepare_job
         Me.Button1.Text = "-"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(852, 20)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(35, 23)
+        Me.Button4.TabIndex = 119
+        Me.Button4.Text = ">>"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(368, 25)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(78, 13)
+        Me.Label2.TabIndex = 120
+        Me.Label2.Text = "PICKUP DATE"
+        '
+        'dtpPdate
+        '
+        Me.dtpPdate.CustomFormat = "MMM dd, yyyy"
+        Me.dtpPdate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpPdate.Location = New System.Drawing.Point(453, 21)
+        Me.dtpPdate.Name = "dtpPdate"
+        Me.dtpPdate.Size = New System.Drawing.Size(115, 20)
+        Me.dtpPdate.TabIndex = 121
+        '
+        'Button6
+        '
+        Me.Button6.Location = New System.Drawing.Point(852, 46)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(35, 23)
+        Me.Button6.TabIndex = 122
+        Me.Button6.Text = ">>"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
         'prepare_job
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(939, 339)
+        Me.Controls.Add(Me.Button6)
+        Me.Controls.Add(Me.dtpPdate)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.TXTREF)
@@ -213,6 +252,7 @@ Partial Class prepare_job
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "    PREPARE JOB"
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.JOBBS, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -235,4 +275,9 @@ Partial Class prepare_job
     Friend WithEvents Column7 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents JOBBS As System.Windows.Forms.BindingSource
+    Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents dtpPdate As System.Windows.Forms.DateTimePicker
+    Friend WithEvents Button6 As System.Windows.Forms.Button
 End Class

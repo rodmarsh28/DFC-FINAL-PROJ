@@ -22,6 +22,17 @@ Public Class Account_Class
     Public job_no As String
     Public dtable As New DataTable
 
+    Public Sub reverse_accEntry(ByVal id As String, ByVal memo As String)
+        Dim ds As New account_dsTableAdapters.tblAccEntryTableAdapter
+        ds.Connection.ConnectionString = My.Settings.connStringValue
+        Dim dt As New account_ds.tblAccEntryDataTable
+        ds.Fill(dt, id)
+        For Each a As DataRow In dt.Rows
+            ds.Insert(Now, a(1), a(2), a(3), memo, a(6), a(5), a(7), a(8), a(9))
+        Next
+
+
+    End Sub
     Public Sub get_accountInfo()
         Try
             checkConn()
@@ -123,5 +134,24 @@ Public Class Account_Class
         Dim da As New SqlDataAdapter(cmd)
         da.SelectCommand = cmd
         da.Fill(dtable)
+    End Sub
+    Public Sub insert_to_approval(ByVal refno As String, ByVal transdate As DateTime, ByVal type As String, ByVal status As String)
+        Dim acc_ds As New account_dsTableAdapters.tblApprovalTableAdapter
+        acc_ds.Connection.ConnectionString = My.Settings.connStringValue
+        acc_ds.Insert(refno, transdate, type, "", Now, "", "")
+    End Sub
+    Public Sub update_approval_status(ByVal refno As String, ByVal transdate As DateTime, ByVal type As String, ByVal status As String, ByVal dateUpdated As DateTime, ByVal userid As String, ByVal remarks As String)
+        Dim acc_ds As New account_dsTableAdapters.tblApprovalTableAdapter
+        acc_ds.Connection.ConnectionString = My.Settings.connStringValue
+        Dim dst As New account_ds.tblApprovalDataTable
+        acc_ds.Fill(dst, refno)
+        For Each row As DataRow In dst.Rows
+            row.Item("refNo") = refno
+            row.Item("status") = status
+            row.Item("dateUpdated") = dateUpdated
+            row.Item("userID") = userid
+            row.Item("remarks") = remarks
+        Next
+        acc_ds.Update(dst)
     End Sub
 End Class

@@ -43,25 +43,24 @@ Partial Class frmAddItemsInventory
         Me.chkboxInactive = New System.Windows.Forms.CheckBox()
         Me.chkInv = New System.Windows.Forms.CheckBox()
         Me.chkSell = New System.Windows.Forms.CheckBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.txtUnitCost = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.txtBalQty = New System.Windows.Forms.TextBox()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.txtUnit = New System.Windows.Forms.TextBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.txtUnitprice = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
-        Me.txtMinStock = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cmbItemType = New System.Windows.Forms.ComboBox()
-        Me.txtOqty = New System.Windows.Forms.TextBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.txtMinQTY = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.txtBalQty = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtPC = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.txtOunit = New System.Windows.Forms.TextBox()
+        Me.txtUnit = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.txtUnitPrice = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtUnitCost = New System.Windows.Forms.TextBox()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -110,6 +109,7 @@ Partial Class frmAddItemsInventory
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Button4)
         Me.GroupBox1.Controls.Add(Me.lblAccAsset)
         Me.GroupBox1.Controls.Add(Me.lblAccIncome)
         Me.GroupBox1.Controls.Add(Me.lblAccCost)
@@ -268,100 +268,12 @@ Partial Class frmAddItemsInventory
         Me.chkSell.Text = "I Sell this item"
         Me.chkSell.UseVisualStyleBackColor = True
         '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.txtOunit)
-        Me.GroupBox2.Controls.Add(Me.txtOqty)
-        Me.GroupBox2.Controls.Add(Me.Label13)
-        Me.GroupBox2.Controls.Add(Me.Label8)
-        Me.GroupBox2.Controls.Add(Me.txtUnitCost)
-        Me.GroupBox2.Controls.Add(Me.Label7)
-        Me.GroupBox2.Controls.Add(Me.txtBalQty)
-        Me.GroupBox2.Controls.Add(Me.Label12)
-        Me.GroupBox2.Controls.Add(Me.txtUnit)
-        Me.GroupBox2.Controls.Add(Me.Label10)
-        Me.GroupBox2.Controls.Add(Me.txtUnitprice)
-        Me.GroupBox2.Controls.Add(Me.Label9)
-        Me.GroupBox2.Location = New System.Drawing.Point(348, 37)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(198, 221)
-        Me.GroupBox2.TabIndex = 17
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Selling Details"
-        '
-        'txtUnitCost
-        '
-        Me.txtUnitCost.Location = New System.Drawing.Point(84, 122)
-        Me.txtUnitCost.Name = "txtUnitCost"
-        Me.txtUnitCost.Size = New System.Drawing.Size(87, 20)
-        Me.txtUnitCost.TabIndex = 26
-        Me.txtUnitCost.Text = "0.00"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(16, 125)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(50, 13)
-        Me.Label7.TabIndex = 25
-        Me.Label7.Text = "Unit Cost"
-        '
-        'txtBalQty
-        '
-        Me.txtBalQty.Location = New System.Drawing.Point(84, 31)
-        Me.txtBalQty.Name = "txtBalQty"
-        Me.txtBalQty.Size = New System.Drawing.Size(87, 20)
-        Me.txtBalQty.TabIndex = 24
-        Me.txtBalQty.Text = "0"
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(16, 34)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(65, 13)
-        Me.Label12.TabIndex = 23
-        Me.Label12.Text = "Balance Qty"
-        '
-        'txtUnit
-        '
-        Me.txtUnit.Location = New System.Drawing.Point(84, 152)
-        Me.txtUnit.Name = "txtUnit"
-        Me.txtUnit.Size = New System.Drawing.Size(87, 20)
-        Me.txtUnit.TabIndex = 22
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(16, 155)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(26, 13)
-        Me.Label10.TabIndex = 21
-        Me.Label10.Text = "Unit"
-        '
-        'txtUnitprice
-        '
-        Me.txtUnitprice.Location = New System.Drawing.Point(84, 178)
-        Me.txtUnitprice.Name = "txtUnitprice"
-        Me.txtUnitprice.Size = New System.Drawing.Size(87, 20)
-        Me.txtUnitprice.TabIndex = 20
-        Me.txtUnitprice.Text = "0.00"
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(16, 181)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(53, 13)
-        Me.Label9.TabIndex = 19
-        Me.Label9.Text = "Unit Price"
-        '
         'btnAdd
         '
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnAdd.Location = New System.Drawing.Point(173, 328)
+        Me.btnAdd.Location = New System.Drawing.Point(84, 186)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(94, 35)
+        Me.btnAdd.Size = New System.Drawing.Size(133, 61)
         Me.btnAdd.TabIndex = 17
         Me.btnAdd.Text = "ADD ITEM"
         Me.btnAdd.UseVisualStyleBackColor = True
@@ -369,29 +281,12 @@ Partial Class frmAddItemsInventory
         'btnClose
         '
         Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnClose.Location = New System.Drawing.Point(281, 328)
+        Me.btnClose.Location = New System.Drawing.Point(223, 186)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(94, 35)
+        Me.btnClose.Size = New System.Drawing.Size(133, 61)
         Me.btnClose.TabIndex = 18
         Me.btnClose.Text = "CLOSE"
         Me.btnClose.UseVisualStyleBackColor = True
-        '
-        'txtMinStock
-        '
-        Me.txtMinStock.Location = New System.Drawing.Point(408, 288)
-        Me.txtMinStock.Name = "txtMinStock"
-        Me.txtMinStock.Size = New System.Drawing.Size(69, 20)
-        Me.txtMinStock.TabIndex = 24
-        Me.txtMinStock.Text = "0"
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(364, 268)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(164, 13)
-        Me.Label11.TabIndex = 23
-        Me.Label11.Text = "Minimum Level of restocking alert"
         '
         'Label3
         '
@@ -412,57 +307,154 @@ Partial Class frmAddItemsInventory
         Me.cmbItemType.Size = New System.Drawing.Size(167, 21)
         Me.cmbItemType.TabIndex = 26
         '
-        'txtOqty
+        'GroupBox2
         '
-        Me.txtOqty.Location = New System.Drawing.Point(84, 57)
-        Me.txtOqty.Name = "txtOqty"
-        Me.txtOqty.Size = New System.Drawing.Size(87, 20)
-        Me.txtOqty.TabIndex = 28
-        Me.txtOqty.Text = "0"
+        Me.GroupBox2.Controls.Add(Me.Label11)
+        Me.GroupBox2.Controls.Add(Me.txtMinQTY)
+        Me.GroupBox2.Controls.Add(Me.Label12)
+        Me.GroupBox2.Controls.Add(Me.btnClose)
+        Me.GroupBox2.Controls.Add(Me.txtBalQty)
+        Me.GroupBox2.Controls.Add(Me.btnAdd)
+        Me.GroupBox2.Controls.Add(Me.Label7)
+        Me.GroupBox2.Controls.Add(Me.txtPC)
+        Me.GroupBox2.Controls.Add(Me.Label8)
+        Me.GroupBox2.Controls.Add(Me.txtUnit)
+        Me.GroupBox2.Controls.Add(Me.Label9)
+        Me.GroupBox2.Controls.Add(Me.txtUnitPrice)
+        Me.GroupBox2.Controls.Add(Me.Label10)
+        Me.GroupBox2.Controls.Add(Me.txtUnitCost)
+        Me.GroupBox2.Location = New System.Drawing.Point(348, 37)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(429, 272)
+        Me.GroupBox2.TabIndex = 117
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Unit of Measurement"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(200, 44)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(71, 13)
+        Me.Label11.TabIndex = 131
+        Me.Label11.Text = "Balance QTY"
+        '
+        'txtMinQTY
+        '
+        Me.txtMinQTY.Location = New System.Drawing.Point(282, 75)
+        Me.txtMinQTY.Name = "txtMinQTY"
+        Me.txtMinQTY.Size = New System.Drawing.Size(87, 20)
+        Me.txtMinQTY.TabIndex = 130
+        Me.txtMinQTY.Text = "0.00"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(199, 72)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(57, 26)
+        Me.Label12.TabIndex = 129
+        Me.Label12.Text = "Minimum " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Stock Qty "
+        '
+        'txtBalQty
+        '
+        Me.txtBalQty.Location = New System.Drawing.Point(282, 42)
+        Me.txtBalQty.Name = "txtBalQty"
+        Me.txtBalQty.Size = New System.Drawing.Size(87, 20)
+        Me.txtBalQty.TabIndex = 128
+        Me.txtBalQty.Text = "0.00"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(15, 44)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(32, 13)
+        Me.Label7.TabIndex = 127
+        Me.Label7.Text = "UOM"
+        '
+        'txtPC
+        '
+        Me.txtPC.Location = New System.Drawing.Point(97, 75)
+        Me.txtPC.Name = "txtPC"
+        Me.txtPC.Size = New System.Drawing.Size(87, 20)
+        Me.txtPC.TabIndex = 126
+        Me.txtPC.Text = "0.00"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(16, 60)
+        Me.Label8.Location = New System.Drawing.Point(14, 72)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(52, 13)
-        Me.Label8.TabIndex = 27
-        Me.Label8.Text = "Other Qty"
+        Me.Label8.Size = New System.Drawing.Size(52, 26)
+        Me.Label8.TabIndex = 125
+        Me.Label8.Text = "PC QTY " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Optional)"
         '
-        'Label13
+        'txtUnit
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(16, 86)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(55, 13)
-        Me.Label13.TabIndex = 27
-        Me.Label13.Text = "Other Unit"
+        Me.txtUnit.Location = New System.Drawing.Point(97, 42)
+        Me.txtUnit.Name = "txtUnit"
+        Me.txtUnit.Size = New System.Drawing.Size(87, 20)
+        Me.txtUnit.TabIndex = 124
+        Me.txtUnit.Text = "0.00"
         '
-        'txtOunit
+        'Label9
         '
-        Me.txtOunit.Location = New System.Drawing.Point(84, 83)
-        Me.txtOunit.Name = "txtOunit"
-        Me.txtOunit.Size = New System.Drawing.Size(87, 20)
-        Me.txtOunit.TabIndex = 29
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(15, 114)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(50, 13)
+        Me.Label9.TabIndex = 121
+        Me.Label9.Text = "Unit Cost"
+        '
+        'txtUnitPrice
+        '
+        Me.txtUnitPrice.Location = New System.Drawing.Point(282, 111)
+        Me.txtUnitPrice.Name = "txtUnitPrice"
+        Me.txtUnitPrice.Size = New System.Drawing.Size(87, 20)
+        Me.txtUnitPrice.TabIndex = 120
+        Me.txtUnitPrice.Text = "0.00"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(201, 114)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(53, 13)
+        Me.Label10.TabIndex = 119
+        Me.Label10.Text = "Unit Price"
+        '
+        'txtUnitCost
+        '
+        Me.txtUnitCost.Location = New System.Drawing.Point(97, 111)
+        Me.txtUnitCost.Name = "txtUnitCost"
+        Me.txtUnitCost.Size = New System.Drawing.Size(87, 20)
+        Me.txtUnitCost.TabIndex = 118
+        Me.txtUnitCost.Text = "0.00"
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(294, 40)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(32, 23)
+        Me.Button4.TabIndex = 20
+        Me.Button4.Text = ">"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'frmAddItemsInventory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(592, 387)
+        Me.ClientSize = New System.Drawing.Size(783, 328)
+        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.cmbItemType)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.txtMinStock)
-        Me.Controls.Add(Me.Label11)
-        Me.Controls.Add(Me.btnClose)
-        Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.txtItemdesc)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtItemno)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.GroupBox2)
         Me.Name = "frmAddItemsInventory"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Add Inventory Items"
@@ -492,26 +484,25 @@ Partial Class frmAddItemsInventory
     Friend WithEvents chkboxInactive As System.Windows.Forms.CheckBox
     Friend WithEvents chkInv As System.Windows.Forms.CheckBox
     Friend WithEvents chkSell As System.Windows.Forms.CheckBox
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents txtUnit As System.Windows.Forms.TextBox
-    Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents txtUnitprice As System.Windows.Forms.TextBox
-    Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents btnAdd As System.Windows.Forms.Button
     Friend WithEvents btnClose As System.Windows.Forms.Button
-    Friend WithEvents txtMinStock As System.Windows.Forms.TextBox
-    Friend WithEvents Label11 As System.Windows.Forms.Label
-    Friend WithEvents txtBalQty As System.Windows.Forms.TextBox
-    Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents cmbItemType As System.Windows.Forms.ComboBox
-    Friend WithEvents txtUnitCost As System.Windows.Forms.TextBox
-    Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents lblAccAsset As System.Windows.Forms.TextBox
     Friend WithEvents lblAccIncome As System.Windows.Forms.TextBox
     Friend WithEvents lblAccCost As System.Windows.Forms.TextBox
-    Friend WithEvents txtOunit As System.Windows.Forms.TextBox
-    Friend WithEvents txtOqty As System.Windows.Forms.TextBox
-    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents txtUnitPrice As System.Windows.Forms.TextBox
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents txtUnitCost As System.Windows.Forms.TextBox
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents txtMinQTY As System.Windows.Forms.TextBox
+    Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents txtBalQty As System.Windows.Forms.TextBox
+    Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents txtUnit As System.Windows.Forms.TextBox
+    Friend WithEvents txtPC As System.Windows.Forms.TextBox
+    Friend WithEvents Button4 As System.Windows.Forms.Button
 End Class
