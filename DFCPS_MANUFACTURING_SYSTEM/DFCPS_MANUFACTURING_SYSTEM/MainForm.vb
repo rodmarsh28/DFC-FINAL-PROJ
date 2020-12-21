@@ -137,13 +137,13 @@ Public Class MainForm
     End Sub
 
     Private Sub MetroButton4_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnProd.Click
-        'frmProductionMain.ShowDialog()
-        MsgBox("This Module is not available right now", MsgBoxStyle.Information, "System information")
+        frmProductionMain.ShowDialog()
+        'MsgBox("This Module is not available right now", MsgBoxStyle.Information, "System information")
     End Sub
 
     Private Sub MetroButton3_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHR.Click
-        'HRISMain.ShowDialog()
-        MsgBox("This Module is not available right now", MsgBoxStyle.Information, "System information")
+        '.ShowDialog()
+        ''MsgBox("This Module is not available right now", MsgBoxStyle.Information, "System information")
     End Sub
 
     Private Sub MetroButton1_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAccounting.Click
@@ -203,5 +203,9 @@ Public Class MainForm
         TViewer.MODE = "Pending"
         TViewer.StartPosition = FormStartPosition.CenterScreen
         TViewer.Show()
+    End Sub
+
+    Private Sub Label1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label1.Click
+
     End Sub
 End Class

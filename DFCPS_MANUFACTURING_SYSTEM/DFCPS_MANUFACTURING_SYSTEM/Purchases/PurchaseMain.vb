@@ -18,7 +18,7 @@
         frm.Show()
     End Sub
 
-    Private Sub PreparePurchaseInvoiceToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PreparePurchaseInvoiceToolStripMenuItem.Click
+    Private Sub PreparePurchaseInvoiceToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim frm As New frmPurchases
         frm.lblFormMode.Text = "PURCHASE RECEIVING"
         frm.MdiParent = Me
@@ -36,7 +36,7 @@
         TransactionViewer.ShowDialog()
     End Sub
 
-    Private Sub PurchaseRequisitionHistoryToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PurchaseRequisitionHistoryToolStripMenuItem.Click
+    Private Sub PurchaseRequisitionHistoryToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
     End Sub
 

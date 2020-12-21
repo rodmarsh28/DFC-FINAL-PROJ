@@ -35,13 +35,12 @@ Partial Class frmPurchaseMain
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AddEmployeesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WidthrawItemsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PreparePurchaseInvoiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TransactionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PurchaseRequisitionHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseOrderHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseInvoiceHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PayrollToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ManageItemStockLevelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -113,7 +112,7 @@ Partial Class frmPurchaseMain
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddEmployeesToolStripMenuItem, Me.WidthrawItemsToolStripMenuItem, Me.PreparePurchaseInvoiceToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddEmployeesToolStripMenuItem, Me.WidthrawItemsToolStripMenuItem, Me.ManageItemStockLevelToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "File"
@@ -121,44 +120,32 @@ Partial Class frmPurchaseMain
         'AddEmployeesToolStripMenuItem
         '
         Me.AddEmployeesToolStripMenuItem.Name = "AddEmployeesToolStripMenuItem"
-        Me.AddEmployeesToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
-        Me.AddEmployeesToolStripMenuItem.Text = "Prepare Item Requisition"
+        Me.AddEmployeesToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.AddEmployeesToolStripMenuItem.Text = "Manage Supplier Card"
         '
         'WidthrawItemsToolStripMenuItem
         '
         Me.WidthrawItemsToolStripMenuItem.Name = "WidthrawItemsToolStripMenuItem"
-        Me.WidthrawItemsToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
+        Me.WidthrawItemsToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
         Me.WidthrawItemsToolStripMenuItem.Text = "Prepare Purchase Order"
-        '
-        'PreparePurchaseInvoiceToolStripMenuItem
-        '
-        Me.PreparePurchaseInvoiceToolStripMenuItem.Name = "PreparePurchaseInvoiceToolStripMenuItem"
-        Me.PreparePurchaseInvoiceToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
-        Me.PreparePurchaseInvoiceToolStripMenuItem.Text = "Receiving Purchases"
         '
         'TransactionToolStripMenuItem
         '
-        Me.TransactionToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PurchaseRequisitionHistoryToolStripMenuItem, Me.PurchaseOrderHistoryToolStripMenuItem, Me.PurchaseInvoiceHistoryToolStripMenuItem})
+        Me.TransactionToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PurchaseOrderHistoryToolStripMenuItem, Me.PurchaseInvoiceHistoryToolStripMenuItem})
         Me.TransactionToolStripMenuItem.Name = "TransactionToolStripMenuItem"
         Me.TransactionToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.TransactionToolStripMenuItem.Text = "View"
         '
-        'PurchaseRequisitionHistoryToolStripMenuItem
-        '
-        Me.PurchaseRequisitionHistoryToolStripMenuItem.Name = "PurchaseRequisitionHistoryToolStripMenuItem"
-        Me.PurchaseRequisitionHistoryToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
-        Me.PurchaseRequisitionHistoryToolStripMenuItem.Text = "Item Requisition History"
-        '
         'PurchaseOrderHistoryToolStripMenuItem
         '
         Me.PurchaseOrderHistoryToolStripMenuItem.Name = "PurchaseOrderHistoryToolStripMenuItem"
-        Me.PurchaseOrderHistoryToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
+        Me.PurchaseOrderHistoryToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
         Me.PurchaseOrderHistoryToolStripMenuItem.Text = "Purchase Order History"
         '
         'PurchaseInvoiceHistoryToolStripMenuItem
         '
         Me.PurchaseInvoiceHistoryToolStripMenuItem.Name = "PurchaseInvoiceHistoryToolStripMenuItem"
-        Me.PurchaseInvoiceHistoryToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
+        Me.PurchaseInvoiceHistoryToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
         Me.PurchaseInvoiceHistoryToolStripMenuItem.Text = "Item Receiving History"
         '
         'PayrollToolStripMenuItem
@@ -172,6 +159,12 @@ Partial Class frmPurchaseMain
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
         Me.AboutToolStripMenuItem.Text = "About"
+        '
+        'ManageItemStockLevelToolStripMenuItem
+        '
+        Me.ManageItemStockLevelToolStripMenuItem.Name = "ManageItemStockLevelToolStripMenuItem"
+        Me.ManageItemStockLevelToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.ManageItemStockLevelToolStripMenuItem.Text = "Manage Item Stock Level"
         '
         'frmPurchaseMain
         '
@@ -206,11 +199,10 @@ Partial Class frmPurchaseMain
     Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AddEmployeesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents WidthrawItemsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents PreparePurchaseInvoiceToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TransactionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents PurchaseRequisitionHistoryToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PurchaseOrderHistoryToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PurchaseInvoiceHistoryToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PayrollToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AboutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ManageItemStockLevelToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

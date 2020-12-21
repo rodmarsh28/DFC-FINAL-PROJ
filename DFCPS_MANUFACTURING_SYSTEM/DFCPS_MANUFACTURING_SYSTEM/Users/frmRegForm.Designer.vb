@@ -55,9 +55,9 @@ Partial Class frmRegForm
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(21, 178)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(125, 16)
+        Me.Label2.Size = New System.Drawing.Size(94, 16)
         Me.Label2.TabIndex = 1
-        Me.Label2.Text = "ACCOUNT ROLE"
+        Me.Label2.Text = "USER ROLE"
         '
         'Label3
         '
@@ -134,11 +134,11 @@ Partial Class frmRegForm
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Comic Sans MS", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(124, 25)
+        Me.Label7.Location = New System.Drawing.Point(144, 25)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(267, 27)
+        Me.Label7.Size = New System.Drawing.Size(223, 27)
         Me.Label7.TabIndex = 13
-        Me.Label7.Text = "ACCOUNT REGISTRATION"
+        Me.Label7.Text = "USER REGISTRATION"
         '
         'btnReg
         '

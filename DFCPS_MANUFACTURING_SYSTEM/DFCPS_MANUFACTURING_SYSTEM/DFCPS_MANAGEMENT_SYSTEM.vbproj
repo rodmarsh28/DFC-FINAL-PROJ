@@ -1056,6 +1056,12 @@
     <Compile Include="Purchases\purchase_ds.vb">
       <DependentUpon>purchase_ds.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Purchases\rpt_purchaseOrder.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_purchaseOrder.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="qry_class.vb" />
     <Compile Include="reportViewer.Designer.vb">
       <DependentUpon>reportViewer.vb</DependentUpon>
@@ -1658,6 +1664,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Purchases\PurchaseMain.resx">
       <DependentUpon>PurchaseMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchases\rpt_purchaseOrder.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_purchaseOrder.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="reportViewer.resx">
       <DependentUpon>reportViewer.vb</DependentUpon>

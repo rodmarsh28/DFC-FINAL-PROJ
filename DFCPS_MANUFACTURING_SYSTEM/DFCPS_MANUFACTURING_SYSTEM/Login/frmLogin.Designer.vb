@@ -65,7 +65,7 @@ Partial Class frmLogin
         '
         Me.txtUsername.BackColor = System.Drawing.Color.White
         Me.txtUsername.Location = New System.Drawing.Point(329, 39)
-        Me.txtUsername.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtUsername.Margin = New System.Windows.Forms.Padding(4)
         Me.txtUsername.Name = "txtUsername"
         Me.txtUsername.Size = New System.Drawing.Size(234, 22)
         Me.txtUsername.TabIndex = 1
@@ -74,7 +74,7 @@ Partial Class frmLogin
         '
         Me.txtPassword.BackColor = System.Drawing.Color.White
         Me.txtPassword.Location = New System.Drawing.Point(329, 92)
-        Me.txtPassword.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtPassword.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword.Size = New System.Drawing.Size(234, 22)
@@ -85,7 +85,7 @@ Partial Class frmLogin
         Me.OK.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(94, Byte), Integer), CType(CType(32, Byte), Integer))
         Me.OK.ForeColor = System.Drawing.Color.White
         Me.OK.Location = New System.Drawing.Point(334, 133)
-        Me.OK.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.OK.Margin = New System.Windows.Forms.Padding(4)
         Me.OK.Name = "OK"
         Me.OK.Size = New System.Drawing.Size(113, 49)
         Me.OK.TabIndex = 4
@@ -99,7 +99,7 @@ Partial Class frmLogin
         Me.Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Cancel.ForeColor = System.Drawing.Color.White
         Me.Cancel.Location = New System.Drawing.Point(450, 133)
-        Me.Cancel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Cancel.Margin = New System.Windows.Forms.Padding(4)
         Me.Cancel.Name = "Cancel"
         Me.Cancel.Size = New System.Drawing.Size(113, 49)
         Me.Cancel.TabIndex = 5
@@ -112,9 +112,8 @@ Partial Class frmLogin
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(94, Byte), Integer), CType(CType(32, Byte), Integer))
         Me.Panel2.BackgroundImage = CType(resources.GetObject("Panel2.BackgroundImage"), System.Drawing.Image)
         Me.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(283, 217)
         Me.Panel2.TabIndex = 7
@@ -137,7 +136,7 @@ Partial Class frmLogin
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.KeyPreview = True
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmLogin"
