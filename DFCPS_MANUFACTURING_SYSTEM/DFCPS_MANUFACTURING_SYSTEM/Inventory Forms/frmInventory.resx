@@ -414,17 +414,11 @@
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>DESCRIPTION</value>
   </data>
-  <data name="Column2.Width" type="System.Int32, mscorlib">
-    <value>200</value>
-  </data>
   <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="Column3.HeaderText" xml:space="preserve">
     <value>UNIT</value>
-  </data>
-  <data name="Column3.Width" type="System.Int32, mscorlib">
-    <value>90</value>
   </data>
   <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -438,14 +432,14 @@
   <data name="Column5.HeaderText" xml:space="preserve">
     <value>UNIT_PRICE</value>
   </data>
+  <data name="Column5.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <metadata name="Column6.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="Column6.HeaderText" xml:space="preserve">
     <value>QTY</value>
-  </data>
-  <data name="Column6.Width" type="System.Int32, mscorlib">
-    <value>90</value>
   </data>
   <metadata name="Column7.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -455,9 +449,6 @@
   </data>
   <data name="Column7.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="Column7.Width" type="System.Int32, mscorlib">
-    <value>90</value>
   </data>
   <data name="dgv.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 82</value>

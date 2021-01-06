@@ -97,5 +97,7 @@ Public Class frmInventory
         Else
             dgv.Columns(6).Visible = False
         End If
+        dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+
     End Sub
 End Class

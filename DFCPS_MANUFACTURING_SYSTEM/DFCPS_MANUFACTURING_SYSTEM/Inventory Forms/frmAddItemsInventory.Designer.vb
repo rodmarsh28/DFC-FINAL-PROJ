@@ -28,6 +28,7 @@ Partial Class frmAddItemsInventory
         Me.Label2 = New System.Windows.Forms.Label()
         Me.chkBuy = New System.Windows.Forms.CheckBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.lblAccAsset = New System.Windows.Forms.TextBox()
         Me.lblAccIncome = New System.Windows.Forms.TextBox()
         Me.lblAccCost = New System.Windows.Forms.TextBox()
@@ -60,7 +61,6 @@ Partial Class frmAddItemsInventory
         Me.txtUnitPrice = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtUnitCost = New System.Windows.Forms.TextBox()
-        Me.Button4 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -132,6 +132,15 @@ Partial Class frmAddItemsInventory
         Me.GroupBox1.TabIndex = 7
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Item Profile"
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(294, 40)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(32, 23)
+        Me.Button4.TabIndex = 20
+        Me.Button4.Text = ">"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'lblAccAsset
         '
@@ -301,7 +310,7 @@ Partial Class frmAddItemsInventory
         '
         Me.cmbItemType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbItemType.FormattingEnabled = True
-        Me.cmbItemType.Items.AddRange(New Object() {"Raw Materials", "Finish Product", "Item, Materials & Supplies"})
+        Me.cmbItemType.Items.AddRange(New Object() {"Raw Materials", "Work in Process", "Finish Product", "Item, Materials & Supplies"})
         Me.cmbItemType.Location = New System.Drawing.Point(72, 10)
         Me.cmbItemType.Name = "cmbItemType"
         Me.cmbItemType.Size = New System.Drawing.Size(167, 21)
@@ -431,15 +440,6 @@ Partial Class frmAddItemsInventory
         Me.txtUnitCost.Size = New System.Drawing.Size(87, 20)
         Me.txtUnitCost.TabIndex = 118
         Me.txtUnitCost.Text = "0.00"
-        '
-        'Button4
-        '
-        Me.Button4.Location = New System.Drawing.Point(294, 40)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(32, 23)
-        Me.Button4.TabIndex = 20
-        Me.Button4.Text = ">"
-        Me.Button4.UseVisualStyleBackColor = True
         '
         'frmAddItemsInventory
         '

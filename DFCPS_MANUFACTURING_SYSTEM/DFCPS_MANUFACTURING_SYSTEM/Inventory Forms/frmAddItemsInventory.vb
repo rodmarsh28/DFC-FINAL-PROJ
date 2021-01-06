@@ -6,8 +6,10 @@
     Sub ItemType()
         If cmbItemType.Text = "Raw Materials" Then
             SeriesNo = "RM-"
+        ElseIf cmbItemType.Text = "Work in Process" Then
+            SeriesNo = "WIP-"
         ElseIf cmbItemType.Text = "Finish Product" Then
-            SeriesNo = "WP-"
+            SeriesNo = "FP-"
         ElseIf cmbItemType.Text = "Item, Materials & Supplies" Then
             SeriesNo = "IM-"
         End If
